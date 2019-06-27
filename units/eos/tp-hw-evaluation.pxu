@@ -1,0 +1,7 @@
+unit: test plan
+id: eos-tp-hw-evaluation
+_name: EOS Hardware Evaluation
+_description: EOS hardware compatibility evaluation test plan.
+include:
+# Manual tests
+# Automated tests
