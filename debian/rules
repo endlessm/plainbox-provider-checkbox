@@ -17,6 +17,9 @@ override_dh_auto_install:
 	python3 manage.py install \
 		--prefix=/usr --layout=unix \
 		--root=$(CURDIR)/debian/plainbox-provider-checkbox/
+	install -d $(CURDIR)/debian/plainbox-provider-checkbox/etc/xdg
+	install -m 644 config/eos-hw-evaluation -T \
+		$(CURDIR)/debian/plainbox-provider-checkbox/etc/xdg/checkbox.conf
 
 override_dh_gencontrol:
 	python3 manage.py packaging
