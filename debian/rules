@@ -18,6 +18,9 @@ override_dh_auto_install:
 	python3 $(SRCTOP)/manage.py install \
 		--prefix=/usr --layout=unix \
 		--root=$(CURDIR)/debian/checkbox-provider-base/
+	install -d $(CURDIR)/debian/checkbox-provider-base/etc/xdg
+	install -m 644 config/eos.conf -T \
+		$(CURDIR)/debian/checkbox-provider-base/etc/xdg/checkbox.conf
 
 override_dh_gencontrol:
 	python3 $(SRCTOP)/manage.py packaging
