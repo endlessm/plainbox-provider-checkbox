@@ -21,8 +21,9 @@ def main(args):
     amount, units = meminfo["MemTotal"].split()
 
     amount = float(amount)
-    next_units = {'kB': 'MB',
-                  'MB': 'GB'}
+    next_units = {'kB': 'MiB',
+                  'MB': 'GiB',
+                  'MiB': 'GiB'}
 
     while amount > 1024:
         amount = amount / 1024
