@@ -6,3 +6,4 @@ include:
 # Manual tests
 # Automated tests
     info/cpu                                                      # C15
+    info/memory                                                   # C17
