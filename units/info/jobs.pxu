@@ -13,6 +13,13 @@ estimated_duration: 0.006
 _description: Attaches a report of CPU information
 _summary: Attach a copy of /proc/cpuinfo
 
+id: info/cpu
+plugin: shell
+category_id: com.canonical.plainbox::info
+command: echo "$(grep -e 'model name' /proc/cpuinfo | uniq | cut -d' ' -f3-) x $(grep -e 'siblings' /proc/cpuinfo | uniq | cut -d' ' -f2-)"
+_summary: Get the system's CPU name and count
+_description: Parse the system's CPU name and count
+
 id: dmesg_attachment
 plugin: attachment
 category_id: com.canonical.plainbox::info
