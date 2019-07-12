@@ -135,6 +135,13 @@ estimated_duration: 0.043
 _summary: Attach copy of /proc/meminfo
 _description: Attaches info on system memory as seen in /proc/meminfo.
 
+id: info/memory
+plugin: shell
+category_id: com.canonical.plainbox::info
+command: memory_info
+_summary: Get the system's memory size
+_description: Parse the system's memory size from /proc/meminfo.
+
 id: modprobe_attachment
 plugin: attachment
 category_id: com.canonical.plainbox::info
