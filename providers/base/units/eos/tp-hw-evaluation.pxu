@@ -5,3 +5,4 @@ _description: EOS hardware compatibility suite.
 include:
 # Manual tests
 # Automated tests
+    info/cpu                                                      # C15
