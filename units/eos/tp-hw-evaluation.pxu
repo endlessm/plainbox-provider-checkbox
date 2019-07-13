@@ -12,3 +12,4 @@ include:
     # FIXME: eMMC devices are not categorized as disks,
     # so the disk/ tests bellow will not run on them
     benchmarks/disk/hdparm-read_.*                                # C18
+    disk/smart_.*                                                 # C19
