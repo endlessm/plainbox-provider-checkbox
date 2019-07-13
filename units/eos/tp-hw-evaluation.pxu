@@ -2,8 +2,13 @@ unit: test plan
 id: eos-tp-hw-evaluation
 _name: EOS Hardware Evaluation
 _description: EOS hardware compatibility suite.
+bootstrap_include:
+    device
 include:
 # Manual tests
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
+    # FIXME: eMMC devices are not categorized as disks,
+    # so the disk/ tests bellow will not run on them
+    benchmarks/disk/hdparm-read_.*                                # C18
