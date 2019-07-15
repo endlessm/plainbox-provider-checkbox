@@ -13,6 +13,9 @@ include:
     mediacard/sd-insert                                           # C20
     mediacard/sd-storage                                          # C20
     mediacard/sd-remove                                           # C20
+    optical/read_.*                                               # C21
+    optical/dvd-read_.*                                           # C22
+    optical/bd-read_.*                                            # C4171
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
