@@ -8,6 +8,11 @@ include:
 # Collect manifest information
     com.canonical.plainbox::collect-manifest
 # Manual tests
+    # FIXME: On machines with eMMC storage, the mediacard/ tests
+    # bellow will run on the system storage as well
+    mediacard/sd-insert                                           # C20
+    mediacard/sd-storage                                          # C20
+    mediacard/sd-remove                                           # C20
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
