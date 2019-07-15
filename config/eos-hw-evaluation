@@ -20,7 +20,7 @@ filter = com.canonical.certification::eos-tp-*
 
 [test selection]
 # skip individual test selection?
-forced = yes
+forced = no
 exclude =
 
 [ui]
