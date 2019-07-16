@@ -41,7 +41,7 @@ _description:
  PURPOSE:
      This test will check that you can use a USB HID device
  STEPS:
-     1. Enable either a USB mouse or keyboard
+     1. Connect either a USB mouse or keyboard
      2. For mice, perform actions such as moving the pointer, right and left button clicks and double clicks
      3. For keyboards, commence the test to launch a small tool. Type some text and close the tool.
  VERIFICATION:
