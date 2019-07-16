@@ -27,6 +27,16 @@ include:
     usb-c/insert                                                  # C27
     usb-c/storage-automated                                       # C27
     usb-c/remove                                                  # C27
+    keys/super                                                    # C28
+    keys/brightness                                               # C28
+    keys/volume                                                   # C28
+    keys/mute                                                     # C28
+    keys/microphone-mute                                          # C28
+    keys/media-control                                            # C28
+    keys/wireless                                                 # C28
+    keys/touchpad                                                 # C28
+    keys/video-out                                                # C28
+    keys/battery-info                                             # C28
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
@@ -34,3 +44,6 @@ include:
     # so the disk/ tests bellow will not run on them
     benchmarks/disk/hdparm-read_.*                                # C18
     disk/smart_.*                                                 # C19
+# Suspend
+    keys/sleep                                                    # C28
+# After suspend
