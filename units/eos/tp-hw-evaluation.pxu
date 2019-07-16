@@ -5,6 +5,8 @@ _description: EOS hardware compatibility suite.
 bootstrap_include:
     device
 include:
+# Collect manifest information
+    com.canonical.plainbox::collect-manifest
 # Manual tests
 # Automated tests
     info/cpu                                                      # C15
