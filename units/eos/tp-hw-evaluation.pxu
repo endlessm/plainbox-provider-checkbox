@@ -16,6 +16,17 @@ include:
     optical/read_.*                                               # C21
     optical/dvd-read_.*                                           # C22
     optical/bd-read_.*                                            # C4171
+    usb/panels
+    usb/HID                                                       # C24
+    usb/insert                                                    # C25
+    usb/storage-automated                                         # C25
+    usb/remove                                                    # C25
+    usb3/insert                                                   # C26
+    usb3/storage-automated                                        # C26
+    usb3/remove                                                   # C26
+    usb-c/insert                                                  # C27
+    usb-c/storage-automated                                       # C27
+    usb-c/remove                                                  # C27
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
