@@ -43,9 +43,12 @@ include:
     touchpad/multitouch-zoom                                      # C4048
     touchpad/multitouch-vertical                                  # C4050
     touchpad/multitouch-horizontal                                # C4050
+    camera/still_.*                                               # C33
+    camera/display_.*                                             # C34
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
+    camera/multiple-resolution-images_.*                          # C432
     # FIXME: eMMC devices are not categorized as disks,
     # so the disk/ tests bellow will not run on them
     benchmarks/disk/hdparm-read_.*                                # C18
