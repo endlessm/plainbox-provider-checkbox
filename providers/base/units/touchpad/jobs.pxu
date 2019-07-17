@@ -11,8 +11,9 @@ _purpose:
 _steps:
     1. Make sure that touchpad is enabled.
     2. Move cursor using the touchpad.
+    3. Tap on the Maximize / Restore button on this window to alternate between its maximized and windowed states.
 _verification:
-    Did the cursor move?
+    Did the cursor move? Were you able to click the maximize button by tapping (not clicking) the touchpad?
 _siblings:
     [{ "id": "touchpad/basic-after-suspend",
        "depends": "suspend/suspend_advanced_auto touchpad/basic" }]
