@@ -127,15 +127,18 @@ class GtkScroller(object):
         if self.horiz_scroll_key:
             self.saved_horiz_scroll_enabled = \
                 self.touchpad_settings.get_boolean("horiz-scroll-enabled")
-        self.saved_scroll_method = self.touchpad_settings.get_string(
-            "scroll-method")
+        self.saved_edge_scrolling_enabled = self.touchpad_settings.get_boolean(
+                "edge-scrolling-enabled")
+        self.saved_two_finger_scrolling_enabled = self.touchpad_settings.get_boolean(
+                "two-finger-scrolling-enabled")
 
         # Set touchpad settings.
         if self.horiz_scroll_key:
             self.touchpad_settings.set_boolean("horiz-scroll-enabled", True)
         if self.edge_scroll:
-            self.touchpad_settings.set_string(
-                "scroll-method", "edge-scrolling")
+            self.touchpad_settings.set_boolean("edge-scrolling-enabled", True)
+            self.touchpad_settings.set_boolean(
+                    "two-finger-scrolling-enabled", False)
 
         Gtk.main()
 
@@ -144,8 +147,11 @@ class GtkScroller(object):
         if self.horiz_scroll_key:
             self.touchpad_settings.set_boolean(
                 "horiz-scroll-enabled", self.saved_horiz_scroll_enabled)
-        self.touchpad_settings.set_string(
-            "scroll-method", self.saved_scroll_method)
+        self.touchpad_settings.set_boolean(
+                "edge-scrolling-enabled", self.saved_edge_scrolling_enabled)
+        self.touchpad_settings.set_boolean(
+                "two-finger-scrolling-enabled",
+                self.saved_two_finger_scrolling_enabled)
 
         Gtk.main_quit()
 
