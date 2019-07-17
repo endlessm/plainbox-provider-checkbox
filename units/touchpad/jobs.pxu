@@ -8,8 +8,9 @@ _purpose:
 _steps:
     1. Make sure that touchpad is enabled.
     2. Move cursor using the touchpad.
+    3. Tap on the Maximize / Restore button on this window to alternate between its maximized and windowed states.
 _verification:
-    Did the cursor move?
+    Did the cursor move? Were you able to click the maximize button by tapping (not clicking) the touchpad?
 _siblings:
     [{ "id": "touchpad/basic-after-suspend",
        "depends": "suspend/suspend_advanced touchpad/basic" }]
@@ -142,11 +143,11 @@ estimated_duration: 120.0
 _purpose:
      Determine that the drag and drop function is working as expected.
 _steps:
-    1. Browse to the examples folder in the current user's home directory
-    2. Double tap and hold to select the "Ubuntu_Free_Culture_Showcase" folder
-    3. Drag the selected folder to the desktop and remove finger from touchpad.
+    1. Open Chromium or Google Chrome
+    2. Launch a new tab
+    3. Tap and hold on the tab and move the cursor to drag the tab out of the window
 _verification:
-     Did a selected folder move to the desktop?
+    Was the dragged tab shown in a separate window?
 _siblings:
     [{ "id": "touchpad/drag-and-drop-after-suspend",
        "depends": "suspend/suspend_advanced touchpad/drag-and-drop" }]
@@ -160,11 +161,11 @@ _summary: Check touchpad pinch-to-zoom gesture
 _purpose:
      Check touchpad pinch gesture for zoom
 _steps:
-    1. Open gallery-app with an image
+    1. Open Chromium or Google Chrome
     2. Place two fingers on the touchpad and pinch them together
     3. Place two fingers on the touchpad and move them apart
 _verification:
-     Does the image zoom in and out?
+     Do the contents zoom in and out?
 
 plugin: manual
 category_id: com.canonical.plainbox::touchpad
