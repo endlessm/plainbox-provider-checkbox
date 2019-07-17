@@ -101,8 +101,8 @@ estimated_duration: 120.0
 _purpose:
     Determine that the right click function is working as expected.
 _steps:
-    1. Open a file folder
-    2. Hover cursor over file in folder
+    1. Open a file manager
+    2. Hover the cursor over a file or a folder
     3. 2-touch tap.
 _verification:
     Did the right click pop up menu appear?
