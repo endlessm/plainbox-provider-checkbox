@@ -224,7 +224,7 @@ imports: from com.canonical.plainbox import manifest
 requires:
  manifest.has_special_keys == 'True'
  device.category == 'AUDIO'
- package.name == 'alsa-base'
+ package.name == 'alsa-utils' # TODO: fix this in a ditro-agnostic way
  package.name == 'pulseaudio-utils'
  package.name == 'gstreamer1.0-plugins-good' or package.name == 'gstreamer0.10-plugins-good'
 flags: also-after-suspend
