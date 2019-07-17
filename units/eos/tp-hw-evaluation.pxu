@@ -45,6 +45,10 @@ include:
     touchpad/multitouch-zoom                                      # C4048
     touchpad/multitouch-vertical                                  # C4050
     touchpad/multitouch-horizontal                                # C4050
+    camera/still_.*                                               # C33
+    #FIXME: the camera/ tests bellow do not work
+    camera/display_.*                                             # C34
+    camera/multiple-resolution-images_.*                          # C432
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
