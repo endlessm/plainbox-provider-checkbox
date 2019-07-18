@@ -59,6 +59,7 @@ include:
     wireless/wireless_connection_wpa_ac_nm_.*                     # C35
     wireless/wireless_connection_open_ac_nm_.*                    # C35
     wireless/nm_connection_restore_.*
+    ethernet/hotplug-.*                                           # C36
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
