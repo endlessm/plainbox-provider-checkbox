@@ -4,6 +4,7 @@ _name: EOS Hardware Evaluation
 _description: EOS hardware compatibility suite.
 bootstrap_include:
     device
+    graphics_card
 include:
 # Collect manifest information
     com.canonical.plainbox::collect-manifest
@@ -60,9 +61,22 @@ include:
     wireless/wireless_connection_open_ac_nm_.*                    # C35
     wireless/nm_connection_restore_.*
     ethernet/hotplug-.*                                           # C36
+    audio/playback_auto                                           # C44
+    audio/alsa_record_playback_internal                           # C41
+    audio/speaker-headphone-plug-detection
+    audio/playback_headphones                                     # C43
+    audio/alsa_record_playback_external                           # C42
+    audio/1_playback_hdmi_.*                                      # C45
+    audio/1_playback_displayport.*                                # C46
+    audio/1_playback_type-c_displayport_.*                        # C431
+    audio/2_playback_hdmi_.*                                      # C45
+    audio/2_playback_displayport.*                                # C46
+    audio/2_playback_type-c_displayport_.*                        # C431
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
+    audio/alsa_info_collect
+    audio/alsa_info_attachment
     # FIXME: eMMC devices are not categorized as disks,
     # so the disk/ tests bellow will not run on them
     benchmarks/disk/hdparm-read_.*                                # C18
