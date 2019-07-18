@@ -4,7 +4,6 @@ id: audio/list_devices
 estimated_duration: 1.0
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
 command: cat /proc/asound/cards
 _description: Test to detect audio devices
 
@@ -37,7 +36,6 @@ estimated_duration: 5.0
 depends: audio/list_devices
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 command:
@@ -69,7 +67,6 @@ imports: from com.canonical.plainbox import manifest
 requires:
  manifest.has_hdmi == 'True'
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 flags: also-after-suspend
@@ -99,7 +96,6 @@ imports: from com.canonical.plainbox import manifest
 requires:
  manifest.has_dp == 'True'
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 flags: also-after-suspend
@@ -129,7 +125,6 @@ estimated_duration: 30.0
 requires:
  manifest.has_thunderbolt == 'True'
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 flags: also-after-suspend
@@ -159,7 +154,6 @@ estimated_duration: 30.0
 requires:
  manifest.has_thunderbolt3 == 'True'
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 flags: also-after-suspend
@@ -189,7 +183,6 @@ estimated_duration: 30.0
 requires:
  manifest.has_usbc_video == 'True'
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 flags: also-after-suspend
@@ -219,7 +212,6 @@ estimated_duration: 30.0
 requires:
  manifest.has_usbc_video == 'True'
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 flags: also-after-suspend
@@ -246,7 +238,6 @@ estimated_duration: 20.0
 depends: audio/list_devices
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 command:
@@ -273,7 +264,7 @@ estimated_duration: 20.0
 depends: audio/playback_auto
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
+ package.name == 'alsa-utils'
  package.name == 'pulseaudio-utils'
  package.name == 'gstreamer1.0-plugins-good' or package.name == 'gstreamer0.10-plugins-good'
 command:
@@ -301,7 +292,7 @@ estimated_duration: 20.0
 depends: audio/playback_headphones
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
+ package.name == 'alsa-utils'
  package.name == 'pulseaudio-utils'
  package.name == 'gstreamer1.0-plugins-good' or package.name == 'gstreamer0.10-plugins-good'
 command:
@@ -327,7 +318,7 @@ id: audio/alsa_record_playback_usb
 estimated_duration: 120.0
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
+ package.name == 'alsa-utils'
  package.name == 'pulseaudio-utils'
  package.name == 'gstreamer1.0-plugins-good' or package.name == 'gstreamer0.10-plugins-good'
 command:
@@ -359,7 +350,6 @@ requires:
  package.name == 'libgstreamer1.0-0'
  package.name == 'gstreamer1.0-plugins-good'
  package.name == 'gstreamer1.0-pulseaudio'
- package.name == 'alsa-base'
  device.category == 'AUDIO'
 command: audio_test.py
 _description:
@@ -470,7 +460,7 @@ estimated_duration: 120.0
 requires:
  dmi.product in ['Desktop','Low Profile Desktop','Tower','Mini Tower','Space-saving','All In One','All-In-One','AIO']
  device.category == 'AUDIO'
- package.name == 'alsa-base'
+ package.name == 'alsa-utils'
  package.name == 'pulseaudio-utils'
  package.name == 'gstreamer1.0-plugins-good' or package.name == 'gstreamer0.10-plugins-good'
 command:
@@ -542,7 +532,6 @@ estimated_duration: 20.0
 depends: audio/playback_auto
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 command:
@@ -571,7 +560,6 @@ depends: audio/playback_headphones
 estimated_duration: 30.0
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 command:
@@ -599,7 +587,6 @@ estimated_duration: 1.0
 depends: power-management/suspend_30_cycles
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
 command: cat /proc/asound/cards
 _description: Test to detect audio devices after suspending 30 times.
 
@@ -610,7 +597,7 @@ estimated_duration: 5.0
 depends: audio/list_devices power-management/suspend_30_cycles
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
+ package.name == 'alsa-utils'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
  package.name == 'pulseaudio-utils'
 command:
@@ -642,7 +629,6 @@ requires:
  package.name == 'libgstreamer1.0-0'
  package.name == 'gstreamer1.0-plugins-good'
  package.name == 'gstreamer1.0-pulseaudio'
- package.name == 'alsa-base'
  device.category == 'AUDIO'
 command: audio_test.py
 _description:
@@ -684,7 +670,6 @@ estimated_duration: 1.0
 depends: power-management/suspend_30_cycles
 requires:
  device.category == 'AUDIO'
- package.name == 'alsa-base'
 _description: Record mixer settings after suspending 30 times.
 command:
   audio_settings.py store --file="$PLAINBOX_SESSION_SHARE"/audio_settings_after_suspend_30_cycles
