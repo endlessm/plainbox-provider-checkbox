@@ -45,6 +45,15 @@ include:
     touchpad/multitouch-horizontal                                # C4050
     camera/still_.*                                               # C33
     camera/display_.*                                             # C34
+    wireless/nm_connection_save_.*
+    wireless/wireless_scanning_.*                                 # C35
+    wireless/wireless_connection_wpa_bg_nm_.*                     # C35
+    wireless/wireless_connection_open_bg_nm_.*                    # C35
+    wireless/wireless_connection_wpa_n_nm_.*                      # C35
+    wireless/wireless_connection_open_n_nm_.*                     # C35
+    wireless/wireless_connection_wpa_ac_nm_.*                     # C35
+    wireless/wireless_connection_open_ac_nm_.*                    # C35
+    wireless/nm_connection_restore_.*
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
