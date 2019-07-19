@@ -1,5 +1,19 @@
 plugin: manual
 category_id: com.canonical.plainbox::power-management
+id: power-management/powerloss
+estimated_duration: 120.0
+flags: noreturn
+_description:
+ PURPOSE:
+     This test will check the system's ability to boot after a power loss.
+ STEPS:
+     1. Press and hold the power button until the machine turns off.
+     2. Boot your machine again, restart the test program and resume the current testing session.
+ VERIFICATION:
+     Did the system boot correctly?
+
+plugin: manual
+category_id: com.canonical.plainbox::power-management
 id: power-management/shutdown-boot
 estimated_duration: 300.0
 _description:
