@@ -63,11 +63,19 @@ include:
     wireless/wireless_connection_open_ac_nm_.*                    # C35
     wireless/nm_connection_restore_.*
     ethernet/hotplug-.*                                           # C36
+    graphics/1_glxgears_.*
+    graphics/2_glxgears_.*                                        # C2999
+    graphics/1_rotation_.*                                        # C50
+    graphics/2_rotation_.*                                        # C50
+    graphics/1_cycle_resolution_.*                                # C4123
+    graphics/2_cycle_resolution_.*                                # C4123
     audio/playback_auto                                           # C44
     audio/alsa_record_playback_internal                           # C41
     audio/speaker-headphone-plug-detection
     audio/playback_headphones                                     # C43
     audio/alsa_record_playback_external                           # C42
+    graphics/1_video_.*                                           # C51
+    graphics/2_video_.*                                           # C2998
     monitor/1_vga_.*                                              # C49
     monitor/1_dvi_.*                                              # C49
     monitor/1_hdmi_.*                                             # C49
@@ -87,6 +95,8 @@ include:
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
+    graphics/1_driver_version_.*
+    graphics/2_driver_version_.*                                  # C2996
     audio/alsa_info_collect
     audio/alsa_info_attachment
     # FIXME: eMMC devices are not categorized as disks,
