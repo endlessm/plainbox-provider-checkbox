@@ -97,6 +97,9 @@ include:
     led/caps-lock                                                 # C61
     led/numeric-keypad                                            # C61
     led/hdd                                                       # C62
+    bluetooth/HID                                                 # C38 C39
+    bluetooth/file-transfer                                       # C40
+    bluetooth/visibility                                          # C37
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
