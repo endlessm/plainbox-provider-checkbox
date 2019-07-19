@@ -35,6 +35,10 @@ include:
     keys/microphone-mute                                          # C28
     keys/media-control                                            # C28
     keys/wireless                                                 # C28
+    led/airplane-mode                                             # C63
+    led/airplane-mode-disabled                                    # C63
+    led/wlan                                                      # C58
+    led/wlan-disabled                                             # C58
     keys/touchpad                                                 # C28
     keys/video-out                                                # C28
     keys/battery-info                                             # C28
@@ -46,6 +50,7 @@ include:
     touchpad/multitouch-zoom                                      # C4048
     touchpad/multitouch-vertical                                  # C4050
     touchpad/multitouch-horizontal                                # C4050
+    camera/led_.*                                                 # C60
     camera/still_.*                                               # C33
     camera/display_.*                                             # C34
     wireless/nm_connection_save_.*
@@ -87,6 +92,11 @@ include:
     audio/2_playback_displayport.*                                # C46
     monitor/2_type-c_displayport_.*                               # C49
     audio/2_playback_type-c_displayport_.*                        # C431
+    led/power                                                     # C57
+    led/battery-charged                                           # C55
+    led/caps-lock                                                 # C61
+    led/numeric-keypad                                            # C61
+    led/hdd                                                       # C62
 # Automated tests
     info/cpu                                                      # C15
     info/memory                                                   # C17
@@ -100,5 +110,7 @@ include:
     benchmarks/disk/hdparm-read_.*                                # C18
     disk/smart_.*                                                 # C19
 # Suspend
+    suspend/suspend_advanced
+    led/power-blink-suspend                                       # C56
     keys/sleep                                                    # C28
 # After suspend

@@ -118,11 +118,13 @@ _description:
      This test will test the wireless key
  STEPS:
      1. Press the wireless key on the keyboard
-     2. Check that the wifi LED turns off or changes color
-     3. Check that wireless is disabled
-     4. Press the same key again
-     5. Check that the wifi LED turns on or changes color
-     6. Check that wireless is enabled
+     2. Check that the wireless radio LED turns off or changes color, if present
+     3. Check that the airplane mode LED turns on or changes color, if present
+     4. Check that wireless is disabled
+     5. Press the same key again
+     6. Check that the wireless radio LED turns on or changes color, if present
+     7. Check that the airplane mode LED turns off or changes color, if present
+     8. Check that wireless is enabled
  VERIFICATION:
      Did the wireless turn off on the first press and on again on the second?
      (NOTE: the LED functionality will be reviewed in a following test. Please
