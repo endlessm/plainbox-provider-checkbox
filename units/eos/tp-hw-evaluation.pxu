@@ -28,6 +28,8 @@ include:
     usb-c/insert                                                  # C27
     usb-c/storage-automated                                       # C27
     usb-c/remove                                                  # C27
+    monitor/1_dim_brightness_.*
+    monitor/2_dim_brightness_.*                                   # C3001
     keys/super                                                    # C28
     keys/brightness                                               # C28
     keys/volume                                                   # C28
@@ -66,11 +68,21 @@ include:
     audio/speaker-headphone-plug-detection
     audio/playback_headphones                                     # C43
     audio/alsa_record_playback_external                           # C42
+    monitor/1_vga_.*                                              # C49
+    monitor/1_dvi_.*                                              # C49
+    monitor/1_hdmi_.*                                             # C49
     audio/1_playback_hdmi_.*                                      # C45
+    monitor/1_displayport_.*                                      # C49
     audio/1_playback_displayport.*                                # C46
+    monitor/1_type-c_displayport_.*                               # C49
     audio/1_playback_type-c_displayport_.*                        # C431
+    monitor/2_vga_.*                                              # C49
+    monitor/2_dvi_.*                                              # C49
+    monitor/2_hdmi_.*                                             # C49
     audio/2_playback_hdmi_.*                                      # C45
+    monitor/2_displayport_.*                                      # C49
     audio/2_playback_displayport.*                                # C46
+    monitor/2_type-c_displayport_.*                               # C49
     audio/2_playback_type-c_displayport_.*                        # C431
 # Automated tests
     info/cpu                                                      # C15
