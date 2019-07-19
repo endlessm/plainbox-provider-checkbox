@@ -117,4 +117,9 @@ include:
     suspend/suspend_advanced
     led/power-blink-suspend                                       # C56
     keys/sleep                                                    # C28
+    keys/power                                                    # C4108
+    power-management/lid                                          # C31
+    power-management/lid_open
 # After suspend
+# Power off
+    power-management/powerloss                                    # C53
