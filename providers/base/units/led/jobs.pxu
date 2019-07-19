@@ -12,14 +12,15 @@ category_id: led
 estimated_duration: 15.0
 
 id: led/power-blink-suspend
+depends: suspend/suspend_advanced
 _summary: Power LED behavior when suspended
 _purpose:
  Check power led is blinking when system is in suspend
 _steps:
- 1. Suspend the system
- 2. Check power led when system is in suspend
+ 1. During the suspend/suspend_advanced test you should have observed the power LED while the system was suspended.
+ 2. Power LED should blink or change color when the system is suspended.
 _verification:
- Power led is blinking when system is in suspend
+ Did the Power LED blink or change color while the system was suspended?
 plugin: manual
 category_id: led
 estimated_duration: 180
@@ -126,6 +127,38 @@ _description:
 
 plugin: manual
 category_id: led
+id: led/airplane-mode
+depends: keys/wireless
+estimated_duration: 60.0
+_description:
+ PURPOSE:
+     Airplane-mode LED verification
+ STEPS:
+     Note: If this machine does not have a LED with an airplane label, add a comment and skip this test.
+     .
+     1. During the keys/wireless test you should have observed the airplane-mode LED while turning wireless off.
+     2. Airplane-mode LED should light or change color when wireless is turned off.
+ VERIFICATION:
+     Did the airplane-mode LED turn on or change color as expected?
+
+plugin: manual
+category_id: led
+id: led/airplane-mode-disabled
+estimated_duration: 30.0
+depends: keys/wireless
+_description:
+ PURPOSE:
+     Validate that airplane-mode LED shuts off when disabled
+ STEPS:
+     Note: If this machine does not have a LED with an airplane label, add a comment and skip this test.
+     .
+     1. During the keys/wireless test you should have observed the airplane-mode LED while turning wireless back on.
+     2. Airplane-mode LED should turn off or change color when wireless is turned on.
+ VERIFICATION:
+     Did the airplane-mode LED turn off or change color as expected?
+
+plugin: manual
+category_id: led
 id: led/wlan
 depends: keys/wireless
 estimated_duration: 60.0
@@ -133,6 +166,8 @@ _description:
  PURPOSE:
      WLAN LED verification
  STEPS:
+     Note: If this machine does not have a LED with a wireless radio label, add a comment and skip this test.
+     .
      1. During the keys/wireless test you should have observed the
      wireless LED while turning wireless back on.
      2. WLAN LED should light or change color when wireless is turned on
@@ -148,6 +183,8 @@ _description:
  PURPOSE:
      Validate that WLAN LED shuts off when disabled
  STEPS:
+     Note: If this machine does not have a LED with a wireless radio label, add a comment and skip this test.
+     .
      1. During the keys/wireless test you should have observed the WLAN LED
      while performing that test after turning wireless off.
      2. WLAN LED should turn off or change color when wireless is turned off
