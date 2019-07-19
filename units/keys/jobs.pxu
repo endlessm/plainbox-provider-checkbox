@@ -86,6 +86,21 @@ _description:
  VERIFICATION:
      Did the system go to sleep after pressing the sleep key?
 
+plugin: manual
+category_id: com.canonical.plainbox::keys
+id: keys/power
+estimated_duration: 90.0
+imports: from com.canonical.plainbox import manifest
+flags: also-after-suspend-manual
+_description:
+ PURPOSE:
+     This test will test suspending the system through the power button
+ STEPS:
+     1. Press the power button
+     2. Wake your system up by pressing the power button
+ VERIFICATION:
+     Did the system go to sleep after pressing the power button?
+
 plugin: user-interact-verify
 category_id: com.canonical.plainbox::keys
 id: keys/battery-info
