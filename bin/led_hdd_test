@@ -7,14 +7,14 @@ trap "rm $TEMPFILE" EXIT
 
 for i in $(seq $TIMEOUT); do
     #launch background writer
-    dd if=/dev/urandom of=$TEMPFILE bs=1024 oflag=direct &
+    dd if=/dev/urandom of=$TEMPFILE bs=1024 &
     WRITE_PID=$!
     echo "Writing..."
     sleep 1
     kill $WRITE_PID
     sync
     echo "Reading..."
-    dd if=$TEMPFILE of=/dev/null bs=1024 iflag=direct
+    dd if=$TEMPFILE of=/dev/null bs=1024
 done
 
 echo "OK, now exiting"
