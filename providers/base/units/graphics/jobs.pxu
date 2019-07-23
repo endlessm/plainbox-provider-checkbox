@@ -22,7 +22,7 @@ plugin: shell
 category_id: com.canonical.plainbox::graphics
 id: graphics/xorg-process
 requires:
- package.name == 'xorg'
+ package.name == 'xserver-xorg'
  package.name == 'procps'
 command: pgrep -a -f '/usr/lib/xorg/Xorg'
 estimated_duration: 0.100
@@ -61,7 +61,7 @@ _description:
 plugin: shell
 category_id: com.canonical.plainbox::graphics
 id: graphics/xorg-failsafe
-requires: package.name == 'xorg'
+requires: package.name == 'xserver-xorg'
 command: ! test -e /var/log/Xorg.failsafe.log
 estimated_duration: 0.030
 _description: Test that the X is not running in failsafe mode.
@@ -183,7 +183,7 @@ flags: also-after-suspend
 plugin: user-interact-verify
 category_id: com.canonical.plainbox::graphics
 requires:
- package.name == 'xorg'
+ package.name == 'xserver-xorg'
  package.name == 'gir1.2-gst-plugins-base-0.10' or package.name == 'gir1.2-gst-plugins-base-1.0'
 command:
  # shellcheck disable=SC1091
@@ -214,7 +214,7 @@ plugin: user-interact-verify
 category_id: com.canonical.plainbox::graphics
 id: graphics/{index}_cycle_resolution_{product_slug}
 flags: also-after-suspend
-requires: package.name == 'xorg'
+requires: package.name == 'xserver-xorg'
 depends: graphics/VESA_drivers_not_in_use
 command:
  # shellcheck disable=SC1091
