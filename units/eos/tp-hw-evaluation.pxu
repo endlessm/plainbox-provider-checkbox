@@ -1,0 +1,128 @@
+unit: test plan
+id: eos-tp-hw-evaluation
+_name: EOS Hardware Evaluation
+_description: EOS hardware compatibility suite.
+bootstrap_include:
+    device
+    graphics_card
+include:
+# Collect manifest information
+    com.canonical.plainbox::collect-manifest
+# Manual tests
+    # FIXME: On machines with eMMC storage, the mediacard/ tests
+    # bellow will run on the system storage as well
+    mediacard/sd-insert                                           # C20
+    mediacard/sd-storage                                          # C20
+    mediacard/sd-remove                                           # C20
+    optical/read_.*                                               # C21
+    optical/dvd-read_.*                                           # C22
+    optical/bd-read_.*                                            # C4171
+    usb/panels
+    usb/HID                                                       # C24
+    usb/insert                                                    # C25
+    usb/storage-automated                                         # C25
+    usb/remove                                                    # C25
+    usb3/insert                                                   # C26
+    usb3/storage-automated                                        # C26
+    usb3/remove                                                   # C26
+    usb-c/insert                                                  # C27
+    usb-c/storage-automated                                       # C27
+    usb-c/remove                                                  # C27
+    monitor/1_dim_brightness_.*
+    monitor/2_dim_brightness_.*                                   # C3001
+    keys/super                                                    # C28
+    keys/brightness                                               # C28
+    keys/volume                                                   # C28
+    keys/mute                                                     # C28
+    keys/microphone-mute                                          # C28
+    keys/media-control                                            # C28
+    keys/wireless                                                 # C28
+    led/airplane-mode                                             # C63
+    led/airplane-mode-disabled                                    # C63
+    led/wlan                                                      # C58
+    led/wlan-disabled                                             # C58
+    keys/touchpad                                                 # C28
+    keys/video-out                                                # C28
+    keys/battery-info                                             # C28
+    input/pointing_.*                                             # C29
+    input/clicking_.*                                             # C29
+    touchpad/basic                                                # C30
+    touchpad/multitouch-rightclick
+    touchpad/drag-and-drop                                        # C4047
+    touchpad/multitouch-zoom                                      # C4048
+    touchpad/multitouch-vertical                                  # C4050
+    touchpad/multitouch-horizontal                                # C4050
+    camera/led_.*                                                 # C60
+    camera/still_.*                                               # C33
+    #FIXME: the camera/ tests bellow do not work
+    camera/display_.*                                             # C34
+    camera/multiple-resolution-images_.*                          # C432
+    #FIXME: the wireless/wireless_ tests bellow do not work
+    wireless/nm_connection_save_.*
+    wireless/wireless_scanning_.*                                 # C35
+    wireless/wireless_connection_wpa_bg_nm_.*                     # C35
+    wireless/wireless_connection_open_bg_nm_.*                    # C35
+    wireless/wireless_connection_wpa_n_nm_.*                      # C35
+    wireless/wireless_connection_open_n_nm_.*                     # C35
+    wireless/wireless_connection_wpa_ac_nm_.*                     # C35
+    wireless/wireless_connection_open_ac_nm_.*                    # C35
+    wireless/nm_connection_restore_.*
+    ethernet/hotplug-.*                                           # C36
+    graphics/1_glxgears_.*
+    graphics/2_glxgears_.*                                        # C2999
+    graphics/1_rotation_.*                                        # C50
+    graphics/2_rotation_.*                                        # C50
+    graphics/1_cycle_resolution_.*                                # C4123
+    graphics/2_cycle_resolution_.*                                # C4123
+    audio/playback_auto                                           # C44
+    audio/alsa_record_playback_internal                           # C41
+    audio/speaker-headphone-plug-detection
+    audio/playback_headphones                                     # C43
+    audio/alsa_record_playback_external                           # C42
+    graphics/1_video_.*                                           # C51
+    graphics/2_video_.*                                           # C2998
+    monitor/1_vga_.*                                              # C49
+    monitor/1_dvi_.*                                              # C49
+    monitor/1_hdmi_.*                                             # C49
+    audio/1_playback_hdmi_.*                                      # C45
+    monitor/1_displayport_.*                                      # C49
+    audio/1_playback_displayport.*                                # C46
+    monitor/1_type-c_displayport_.*                               # C49
+    audio/1_playback_type-c_displayport_.*                        # C431
+    monitor/2_vga_.*                                              # C49
+    monitor/2_dvi_.*                                              # C49
+    monitor/2_hdmi_.*                                             # C49
+    audio/2_playback_hdmi_.*                                      # C45
+    monitor/2_displayport_.*                                      # C49
+    audio/2_playback_displayport.*                                # C46
+    monitor/2_type-c_displayport_.*                               # C49
+    audio/2_playback_type-c_displayport_.*                        # C431
+    led/power                                                     # C57
+    led/battery-charged                                           # C55
+    led/caps-lock                                                 # C61
+    led/numeric-keypad                                            # C61
+    led/hdd                                                       # C62
+    bluetooth/HID                                                 # C38 C39
+    bluetooth/file-transfer                                       # C40
+    bluetooth/visibility                                          # C37
+# Automated tests
+    info/cpu                                                      # C15
+    info/memory                                                   # C17
+    graphics/1_driver_version_.*
+    graphics/2_driver_version_.*                                  # C2996
+    audio/alsa_info_collect
+    audio/alsa_info_attachment
+    # FIXME: eMMC devices are not categorized as disks,
+    # so the disk/ tests bellow will not run on them
+    benchmarks/disk/hdparm-read_.*                                # C18
+    disk/smart_.*                                                 # C19
+# Suspend
+    suspend/suspend_advanced
+    led/power-blink-suspend                                       # C56
+    keys/sleep                                                    # C28
+    keys/power                                                    # C4108
+    power-management/lid                                          # C31
+    power-management/lid_open
+# After suspend
+# Power off
+    power-management/powerloss                                    # C53

@@ -257,3 +257,17 @@ user: root
 flags: also-after-suspend also-after-suspend-manual
 category_id: com.canonical.plainbox::bluetooth
 estimated_duration: 10
+
+plugin: manual
+category_id: com.canonical.plainbox::bluetooth
+id: bluetooth/visitibility
+depends: bluetooth/detect-output
+estimated_duration: 120.0
+_description:
+ PURPOSE:
+     This test will check that this machine can be found by others over Bluetooth
+ STEPS:
+     1. Open the bluetooth configuration panel and make sure it says "Visible"
+     2. On a separate Bluetooth-capable system, scan for Bluetooth devices and make sure you can find this machine
+ VERIFICATION:
+     Was this machine listed when scanning from another system?
