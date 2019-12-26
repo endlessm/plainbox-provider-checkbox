@@ -54,6 +54,7 @@ requires:
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
  net_if_management.device == '{{ interface }}' and net_if_management.managed_by == 'NetworkManager'
+ environment.WPA_BG_SSID != '' and environment.WPA_BG_PSK != ''
 
 unit: template
 template-resource: device
@@ -77,6 +78,7 @@ requires:
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
  net_if_management.device == '{{ interface }}' and net_if_management.managed_by == 'NetworkManager'
+ environment.OPEN_BG_SSID != ''
 
 unit: template
 template-resource: device
@@ -100,6 +102,7 @@ requires:
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
  net_if_management.device == '{{ interface }}' and net_if_management.managed_by == 'NetworkManager'
+ environment.WPA_N_SSID != '' and environment.WPA_N_PSK != ''
 
 unit: template
 template-resource: device
@@ -123,6 +126,7 @@ requires:
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
  net_if_management.device == '{{ interface }}' and net_if_management.managed_by == 'NetworkManager'
+ environment.OPEN_N_SSID != ''
 
 unit: template
 template-resource: device
@@ -147,6 +151,7 @@ requires:
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {%- endif %}
  net_if_management.device == '{{ interface }}' and net_if_management.managed_by == 'NetworkManager'
+ environment.WPA_AC_SSID != '' and environment.WPA_AC_PSK != ''
 
 unit: template
 template-resource: device
@@ -171,6 +176,7 @@ requires:
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {%- endif %}
  net_if_management.device == '{{ interface }}' and net_if_management.managed_by == 'NetworkManager'
+ environment.OPEN_AC_SSID != ''
 
 unit: template
 template-resource: device
