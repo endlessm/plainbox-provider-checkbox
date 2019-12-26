@@ -49,6 +49,7 @@ category_id: com.canonical.plainbox::wireless
 estimated_duration: 30.0
 flags: preserve-locale also-after-suspend also-after-suspend-manual
 requires:
+ environment.WPA_BG_SSID != '' and environment.WPA_BG_PSK != ''
  {%- if __on_ubuntucore__ %}
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
@@ -71,6 +72,7 @@ category_id: com.canonical.plainbox::wireless
 estimated_duration: 30.0
 flags: preserve-locale also-after-suspend also-after-suspend-manual
 requires:
+ environment.OPEN_BG_SSID != ''
  {%- if __on_ubuntucore__ %}
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
@@ -93,6 +95,7 @@ category_id: com.canonical.plainbox::wireless
 estimated_duration: 30.0
 flags: preserve-locale also-after-suspend also-after-suspend-manual
 requires:
+ environment.WPA_N_SSID != '' and environment.WPA_N_PSK != ''
  {%- if __on_ubuntucore__ %}
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
@@ -115,6 +118,7 @@ category_id: com.canonical.plainbox::wireless
 estimated_duration: 30.0
 flags: preserve-locale also-after-suspend also-after-suspend-manual
 requires:
+ environment.OPEN_N_SSID != ''
  {%- if __on_ubuntucore__ %}
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
  {% endif -%}
@@ -137,6 +141,7 @@ category_id: com.canonical.plainbox::wireless
 estimated_duration: 30.0
 flags: preserve-locale also-after-suspend also-after-suspend-manual
 requires:
+ environment.WPA_AC_SSID != '' and environment.WPA_AC_PSK != ''
  wireless_sta_protocol.{{ interface }}_ac == 'supported'
  {%- if __on_ubuntucore__ %}
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
@@ -160,6 +165,7 @@ category_id: com.canonical.plainbox::wireless
 estimated_duration: 30.0
 flags: preserve-locale also-after-suspend also-after-suspend-manual
 requires:
+ environment.OPEN_AC_SSID != ''
  wireless_sta_protocol.{{ interface }}_ac == 'supported'
  {%- if __on_ubuntucore__ %}
  connections.slot == 'network-manager:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:network-manager'
