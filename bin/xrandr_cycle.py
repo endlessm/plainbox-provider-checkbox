@@ -107,69 +107,15 @@ for adapter, params in top_res_per_aspect.items():
         highest_modes.append((adapter, mode))
 
 # Now we have a list of the modes we need to test.  So let's do just that.
-profile_path = os.environ['HOME'] + '/.shutter/profiles/'
 screenshot_path = os.path.join(args.screenshot_dir, 'xrandr_screens')
-
-# Where to find the shutter.xml template? Two possible locations.
-shutter_xml_template = None
-
-if 'PLAINBOX_PROVIDER_DATA' in os.environ:
-    shutter_xml_template = os.path.join(os.environ['PLAINBOX_PROVIDER_DATA'],
-                                        "settings", "shutter.xml")
-else:
-    shutter_xml_template = os.path.join(
-        os.path.split(os.path.dirname(os.path.realpath(__file__)))[0],
-        "data",
-        "settings",
-        "shutter.xml")
 
 if args.keyword:
     screenshot_path = screenshot_path + '_' + args.keyword
-
-regex = re.compile(r'filename="[^"\r\n]*"')
-
-# Keep the shutter profile in place before starting
-
-# Any errors creating the directories or copying the template is fatal,
-# since things won't work if we fail.
 try:
-    os.makedirs(profile_path, exist_ok=True)
     os.makedirs(screenshot_path, exist_ok=True)
 except OSError as excp:
     raise SystemExit("ERROR: Unable to create "
                      "required directories: {}".format(excp))
-
-try:
-    if os.path.exists(profile_path) and os.path.isfile(profile_path):
-        try:
-            os.remove(profile_path)
-        except PermissionError as exc:
-            print("Warning: could not remove {}. {}".format(
-                profile_path, exc))
-    else:
-        shutil.copy(shutter_xml_template, profile_path)
-except (IOError, OSError) as excp:
-    print("ERROR: Unable to copy {} to {}: {}".format(shutter_xml_template,
-                                                      profile_path,
-                                                      excp))
-    if excp.errno == errno.ENOENT:
-        print("Try setting PLAINBOX_PROVIDER_DATA to the the data path of a")
-        print("provider shipping the 'shutter.xml' template file, usually ")
-        print("found under /usr/share.")
-    raise SystemExit()
-
-try:
-    old_profile = open(profile_path + 'shutter.xml', 'r')
-    content = old_profile.read()
-    new_profile = open(profile_path + 'shutter.xml', 'w')
-    # Replace the folder name with the desired one
-    new_profile.write(re.sub(r'folder="[^"\r\n]*"',
-                             'folder="%s"' % screenshot_path, content))
-    new_profile.close()
-    old_profile.close()
-except (IOError, OSError):
-    raise SystemExit("ERROR: While updating folder name "
-                     "in shutter profile: {}".format(sys.exc_info()))
 
 for mode in highest_modes:
     cmd = 'xrandr --output ' + mode[0] + ' --mode ' + mode[1]
@@ -179,34 +125,26 @@ for mode in highest_modes:
         message = 'Failed to set mode ' + mode[1] + ' for output ' + mode[0]
         failure_messages.append(message)
     else:
-        # Update shutter profile to save the image as the right name
-        mode_string = mode[0] + '_' + mode[1]
-
-        try:
-            old_profile = open(profile_path + 'shutter.xml', 'r')
-            content = old_profile.read()
-            new_profile = open(profile_path + 'shutter.xml', 'w')
-            new_profile.write(regex.sub('filename="%s"' % mode_string,
-                              content))
-            new_profile.close()
-            old_profile.close()
-
-            shuttercmd = ['shutter', '--profile=shutter', '--full', '-e']
-            retval = subprocess.call(shuttercmd, shell=False)
-
-            if retval != 0:
-                print("""Could not capture screenshot -
-                         you may need to install the package 'shutter'.""")
-
-        except (IOError, OSError):
-            print("""Could not configure screenshot tool -
-                     you may need to install the package 'shutter',
-                     or check that {}/{} exists and is writable.""".format(
-                profile_path,
-                'shutter.xml'))
-
         message = 'Set mode ' + mode[1] + ' for output ' + mode[0]
         success_messages.append(message)
+
+        try:
+            screenshot_file = os.path.join(screenshot_path, mode[0] + '_' + mode[1])
+            gsscmd = ['gnome-screenshot', '--file=' + screenshot_file]
+            retval = subprocess.call(gsscmd, shell=False)
+            if retval == 0:
+                message = "Screenshot saved at " + screenshot_file
+                success_messages.append(message)
+            else:
+                message = "Failed to grab screenshot, it will not be included "
+                message += "(this is NOT a test failure)"
+                success_messages.append(message)
+        except FileNotFoundError as e:
+            if e.filename == 'gnome-screenshot':
+                message = "gnome-screenshot not installed, skipping screenshot "
+                message += "(this is NOT a test failure)"
+                success_messages.append(message)
+
     time.sleep(3)  # let the hardware recover a bit
 
 # Put things back the way we found them
