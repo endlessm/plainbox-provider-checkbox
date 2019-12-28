@@ -24,3 +24,13 @@ unit: packaging meta-data
 os-id: ubuntu
 os-version-id: 22.04
 Depends: python3-opencv
+
+# This is for camera/led_.*, camera/still_.* and camera/display_.*
+unit: packaging meta-data
+os-id: debian
+Depends: gir1.2-clutter-1.0
+
+# This is for camera/multiple-resolution-images_*
+unit: packaging meta-data
+os-id: debian
+Depends: fswebcam
