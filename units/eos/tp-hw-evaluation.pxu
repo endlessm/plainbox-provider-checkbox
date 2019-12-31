@@ -54,9 +54,7 @@ include:
     touchpad/multitouch-horizontal                                # C4050
     camera/led_.*                                                 # C60
     camera/still_.*                                               # C33
-    #FIXME: the camera/ tests bellow do not work
     camera/display_.*                                             # C34
-    camera/multiple-resolution-images_.*                          # C432
     wireless/nm_connection_save_.*
     wireless/wireless_scanning_.*                                 # C35
     wireless/wireless_connection_wpa_bg_nm_.*                     # C35
@@ -111,6 +109,7 @@ include:
     graphics/2_driver_version_.*                                  # C2996
     audio/alsa_info_collect
     audio/alsa_info_attachment
+    camera/multiple-resolution-images_.*                          # C432
     # FIXME: eMMC devices are not categorized as disks,
     # so the disk/ tests bellow will not run on them
     benchmarks/disk/hdparm-read_.*                                # C18
