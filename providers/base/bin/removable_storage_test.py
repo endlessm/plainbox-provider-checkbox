@@ -703,15 +703,18 @@ def main():
                             int(args.min_speed) > int(supported_speed)):
                         print(" (Will not test it, speed is below %s bits/s)" %
                               args.min_speed, end="")
+                    if (mount_point == "/"):
+                        print(" (Will not test the root filesystem)", end="")
 
                     print("")
 
                 print('-' * 20)
 
                 disks_eligible = {disk: disks_all[disk] for disk in disks_all
-                                  if not args.min_speed or
+                                  if (not args.min_speed or
                                   int(test.rem_disks_speed[disk]) >=
-                                  int(args.min_speed)}
+                                  int(args.min_speed)) and
+                                  disks_all[disk] != "/"}
                 if len(disks_eligible) == 0:
                     logging.error(
                         "No %s disks with speed higher than %s bits/s",
