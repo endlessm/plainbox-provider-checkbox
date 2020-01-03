@@ -21,6 +21,7 @@ from checkbox_support.dbus import connect_to_system_bus         # noqa: E402
 from checkbox_support.dbus.udisks2 import (
     UDISKS2_BLOCK_INTERFACE,
     UDISKS2_DRIVE_INTERFACE,
+    UDISKS2_PARTITION_INTERFACE,
     UDISKS2_FILESYSTEM_INTERFACE,
     UDISKS2_LOOP_INTERFACE,
     UDisks2Model,
@@ -39,6 +40,8 @@ from checkbox_support.parsers.udevadm import (
 from checkbox_support.udev import get_interconnect_speed        # noqa: E402
 from checkbox_support.udev import get_udev_block_devices        # noqa: E402
 from checkbox_support.udev import get_udev_xhci_devices         # noqa: E402
+
+ESP_GUID = "c12a7328-f81f-11d2-ba4b-00a0c93ec93b"
 
 
 class ActionTimer():
@@ -238,7 +241,7 @@ class DiskTest():
                 continue
             entry = ''.join(c for c in line if c not in '\n\t\' ')
             wanted_keys = ('Device:', 'Drive:', 'MountPoints:', 'Vendor:',
-                           'ConnectionBus:', 'Model:', 'Media:',)
+                           'ConnectionBus:', 'Model:', 'Media:', 'Type:',)
             for key in wanted_keys:
                 if entry.startswith(key):
                     udisks_devices[current_bd][current_interface][key] = (
@@ -291,6 +294,11 @@ class DiskTest():
                         drive_object[UDISKS2_DRIVE_INTERFACE]['Vendor:'],
                         drive_object[UDISKS2_DRIVE_INTERFACE]['Model:'],
                         drive_object[UDISKS2_DRIVE_INTERFACE]['Media:']):
+                    continue
+
+                # Skip the EFI System Partition
+                part_type = drive_object[UDISKS2_PARTITION_INTERFACE]['Type:']
+                if part_type == ESP_GUID:
                     continue
 
                 if mount_point is None:
@@ -383,6 +391,10 @@ class DiskTest():
             parent = self._find_parent(dev_file.replace('/dev/', ''))
             if parent and find_pkname_is_root_mountpoint(parent, self.lsblk):
                 continue
+            # Skip the EFI System Partition
+            part_type = udisks2_object[UDISKS2_PARTITION_INTERFACE]['Type']
+            if part_type == ESP_GUID:
+                continue
             # Get the list of mount points of this block device
             mount_points = (
                 udisks2_object[UDISKS2_FILESYSTEM_INTERFACE]['MountPoints'])
@@ -449,6 +461,7 @@ class DiskTest():
                                 CARD_READER_RE.search(parent_model) or
                                 GENERIC_RE.search(parent_vendor)):
                             continue
+                    #TODO: skip if ESP
                     dev_file = str(device_props.Get(udisks, "DeviceFile"))
                     dev_speed = str(device_props.Get(udisks,
                                                      "DriveConnectionSpeed"))
