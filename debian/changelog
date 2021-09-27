@@ -1,10 +1,10 @@
-plainbox-provider-checkbox (0.56.0~ppa~ubuntu21.04.1) hirsute; urgency=low
+plainbox-provider-checkbox (0.59.0~ppa~ubuntu21.10.1) impish; urgency=low
 
   * Auto build.
 
- -- Canonical Certification Team <ce-certification-qa@lists.canonical.com>  Tue, 26 Jan 2021 09:09:56 +0000
+ -- Canonical Certification Team <ce-certification-qa@lists.canonical.com>  Mon, 12 Jul 2021 15:31:47 +0000
 
-plainbox-provider-checkbox (0.56.0-1) UNRELEASED; urgency=medium
+plainbox-provider-checkbox (0.59.0-1) UNRELEASED; urgency=medium
 
   [ Pierre Equoy ]
   * Open for development (remove this message before releasing)
@@ -85,8 +85,13 @@ plainbox-provider-checkbox (0.56.0-1) UNRELEASED; urgency=medium
   * "new upstream version"
   * "new upstream version"
   * "new upstream version"
+  * "new upstream version"
+  * "new upstream version"
+  * "new upstream version"
+  * "new upstream version"
+  * "new upstream version"
 
- -- Jenkins <jenkins@open-joey-201506-18558.maas>  Tue, 26 Jan 2021 08:33:12 +0000
+ -- Jenkins <jenkins@open-joey-201506-18558.maas>  Mon, 12 Jul 2021 14:58:12 +0000
 
 plainbox-provider-checkbox (0.31) unstable; urgency=medium
 
