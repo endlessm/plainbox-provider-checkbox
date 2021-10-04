@@ -1,7 +1,7 @@
 unit: test plan
-id: eos-tp-hw-evaluation
-_name: EOS Hardware Evaluation
-_description: EOS hardware compatibility suite.
+id: eos-tp-hw-compatibility
+_name: EOS Hardware Compatibility
+_description: EOS hardware compatibility test suite.
 bootstrap_include:
     device
     graphics_card
