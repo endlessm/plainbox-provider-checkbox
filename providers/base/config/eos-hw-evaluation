@@ -1,9 +1,9 @@
 #!/usr/bin/env checkbox-cli
 
 [launcher]
-app_id = eos-hw-evaluation
-session_title = EOS Hardware Evaluation
-session_desc = EOS hardware compatibility evaluation suite.
+app_id = eos-hw-compatibility
+session_title = EOS Hardware Compatibility
+session_desc = EOS hardware compatibility test suite.
 app_version = 0.1
 launcher_version = 1
 api_version = 0.99
@@ -15,7 +15,7 @@ use = plainbox-provider-resource-generic plainbox-provider-checkbox
 [test plan]
 # skip test plan selection?
 forced = no
-unit = com.canonical.certification::eos-tp-hw-evaluation
+unit = com.canonical.certification::eos-tp-hw-compatibility
 filter = com.canonical.certification::eos-tp-*
 
 [test selection]
