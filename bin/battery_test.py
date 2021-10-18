@@ -86,27 +86,37 @@ def get_battery_state():
             return None
 
 
-def validate_battery_info(battery):
+def validate_battery_info(battery, charging):
     if battery is None:
         print("Error obtaining battery info")
         return False
-    if battery._state != "discharging":
-        print("Error: battery is not discharging, test will not be valid")
+
+    state = "discharging"
+    if charging:
+        state = "charging"
+
+    if battery._state != state:
+        print("Error: battery is not %s, test will not be valid" % state)
         return False
+
     return True
 
 
-def battery_life(before, after, time):
-    capacity_difference = before._energy - after._energy
-    print("Battery drained by %f %s" % (capacity_difference,
-                                        before._energy_units))
+def battery_life(before, after, time, charging):
+    verb = "drained"
+    if charging:
+        verb = "charged"
+
+    capacity_difference = abs(before._energy - after._energy)
+    print("Battery %s by %f %s" % (verb, capacity_difference,
+                                    before._energy_units))
     if capacity_difference == 0:
         print("Battery capacity did not change, unable to determine remaining"
               " time", file=sys.stderr)
         return 1
     drain_per_second = capacity_difference / time
-    print("Battery drained %f %s per second" % (drain_per_second,
-                                                before._energy_units))
+    print("Battery %s %f %s per second" % (verb, drain_per_second,
+                                            before._energy_units))
 
     # the battery at it's max design capacity (when it was brand new)
     design_life_minutes = round(
@@ -130,11 +140,11 @@ def battery_life(before, after, time):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="""Determine battery drain and battery life by running
-                       the specified action.  Battery life is shown for:
-                       current capacity, capacity when battery is full,
-                       and capacity when battery is full and was brand new
-                       (design capacity)""")
+        description="""Determine battery drain, charge, and battery life
+                       by running the specified action. Battery life is
+                       shown for: current capacity, capacity when battery
+                       is full, and capacity when battery is full and was
+                       brand new (design capacity)""")
     parser.add_argument('-i', '--idle', help="Run the test while system is"
                         " idling", action='store_true')
     parser.add_argument('-s3', '--sleep', help="Run the test while system"
@@ -144,15 +154,18 @@ def main():
                         type=int, required=True)
     parser.add_argument('-m', '--movie',
                         help="Run the test while playing the file MOVIE")
+    parser.add_argument('-c', '--charge',
+                        help="Test battery charging while system is idle",
+                        action='store_true')
     args = parser.parse_args()
 
     test_time = args.time
     battery_before = get_battery_state()
-    if not validate_battery_info(battery_before):
+    if not validate_battery_info(battery_before, args.charge):
         return 1
     print(battery_before)
 
-    if args.idle:
+    if args.idle or args.charge:
         time.sleep(test_time)
     elif args.movie:
         totem_settings = Gio.Settings.new("org.gnome.totem")
@@ -166,11 +179,11 @@ def main():
         subprocess.call(['fwts', 's3', '--s3-sleep-delay=' + str(test_time)])
 
     battery_after = get_battery_state()
-    if not validate_battery_info(battery_after):
+    if not validate_battery_info(battery_after, args.charge):
         return 1
     print(battery_after)
 
-    return(battery_life(battery_before, battery_after, test_time))
+    return(battery_life(battery_before, battery_after, test_time, args.charge))
 
 
 if __name__ == "__main__":
