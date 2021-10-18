@@ -154,6 +154,8 @@ def main():
                         type=int, required=True)
     parser.add_argument('-m', '--movie',
                         help="Run the test while playing the file MOVIE")
+    parser.add_argument('-r', '--random', help="Run the test while generating"
+                        " random numbers", action='store_true')
     parser.add_argument('-c', '--charge',
                         help="Test battery charging while system is idle",
                         action='store_true')
@@ -167,6 +169,10 @@ def main():
 
     if args.idle or args.charge:
         time.sleep(test_time)
+    elif args.random:
+        a = subprocess.Popen(['dd', 'if=/dev/random', 'of=/dev/null'])
+        time.sleep(test_time)
+        a.kill()
     elif args.movie:
         totem_settings = Gio.Settings.new("org.gnome.totem")
         totem_settings.set_boolean("repeat", True)
