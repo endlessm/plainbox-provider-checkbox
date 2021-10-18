@@ -13,7 +13,7 @@ include:
     audio/playback_headphones
     usb/disk_detect
     power-management/unplug_ac
-    power-management/battery_drain_idle
+    power-management/battery_drain_random
     power-management/plug_ac
     power-management/battery_charge_idle
     wireless/nm_connection_save.*
