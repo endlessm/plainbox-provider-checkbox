@@ -15,6 +15,7 @@ include:
     power-management/unplug_ac
     power-management/battery_drain_idle
     power-management/plug_ac
+    power-management/battery_charge_idle
     wireless/nm_connection_save.*
     wireless/wireless_scanning_.*
     wireless/nm_connection_restore_.*
