@@ -195,6 +195,16 @@ command:
 
 plugin: shell
 category_id: com.canonical.plainbox::power-management
+id: power-management/battery_drain_random
+estimated_duration: 180.0
+requires: package.name == 'upower'
+depends: power-management/unplug_ac
+_description: Checks the battery drain during idle. Reports time and capacity until empty.
+command:
+ battery_test.py -t 180 --random
+
+plugin: shell
+category_id: com.canonical.plainbox::power-management
 id: power-management/battery_drain_movie
 estimated_duration: 90.0
 requires:
