@@ -191,6 +191,7 @@ requires: package.name == 'upower'
 depends: power-management/unplug_ac
 _description: Checks the battery drain during idle. Reports time and capacity until empty.
 command:
+ echo "Battery drain test started, it will take aproximately 90 seconds to finish"
  battery_test.py -t 90 --idle
 
 plugin: shell
@@ -201,6 +202,7 @@ requires: package.name == 'upower'
 depends: power-management/unplug_ac
 _description: Checks the battery drain during idle. Reports time and capacity until empty.
 command:
+ echo "Battery drain test started, it will take aproximately 10 minutes to finish"
  systemd-inhibit --who="Checkbox" --why="Battery test running" battery_test.py -t 600 --random
 
 plugin: shell
@@ -212,6 +214,7 @@ requires:
 depends: power-management/unplug_ac
 _description: Checks the battery drain while watching a movie. Reports time and capacity until empty. Requires MOVIE_VAR to be set.
 command:
+ echo "Battery drain test started, it will take aproximately 90 seconds to finish"
  battery_test.py -t 90 --movie "$MOVIE_VAR"
 
 plugin: shell
@@ -225,6 +228,7 @@ requires:
 depends: power-management/unplug_ac
 _description: Checks the battery drain during suspend. Reports time and capacity until empty.
 command:
+ echo "Battery drain test started, it will take aproximately 2 minutes to finish"
  battery_test.py -t 120 --sleep
 
 plugin: manual
