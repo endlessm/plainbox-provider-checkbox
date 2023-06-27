@@ -120,5 +120,6 @@ include:
     power-management/lid                                          # C31
     power-management/lid_open
 # After suspend
+    suspend/system-suspend-to-ram
 # Power off
     power-management/powerloss                                    # C53

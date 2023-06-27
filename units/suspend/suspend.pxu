@@ -2273,3 +2273,40 @@ estimated_duration: 0.5
 command:
  [ -e "${PLAINBOX_SESSION_SHARE}"/fwts_oops_results_after_s3.log ] && xz -c "${PLAINBOX_SESSION_SHARE}"/fwts_oops_results_after_s3.log
 _description: Attaches the FWTS oops results log to the submission after suspend
+
+id: suspend/system-suspend-to-ram
+after: suspend/suspend_advanced_auto
+category_id: com.canonical.plainbox::suspend
+_summary: System suspend to RAM check
+_description:
+ Check if system use suspend to RAM.
+ For more detail, plesae refer to https://www.kernel.org/doc/html/latest/admin-guide/pm/sleep-states.html.
+unit: job
+plugin: shell
+requires:
+ cpuinfo.platform in ('i386', 'x86_64')
+command:
+ echo "System suspended with \"$(dmesg | grep "PM: suspend entry" | tail -1 | sed 's/\[.*PM/PM/')\""
+ state=$(dmesg | grep "PM: suspend entry" | tail -1 | cut -d'(' -f 2 | cut -d ')' -f 1)
+ echo "mem_sleep: $(cat /sys/power/mem_sleep)"
+ deep=$(cat /sys/power/mem_sleep | grep deep)
+ dmesg | grep ACPI | grep supports | sed 's/\[.*ACPI/ACPI/'
+ s3=$(dmesg | grep ACPI | grep supports | sed 's/\[.*ACPI/ACPI/' | grep S3)
+ if [ "$deep" != "" ] && [ "$s3" != "" ]; then
+     echo "The system supports suspend to RAM"
+     case "$state" in
+         "s2idle") echo "But, suspended to Suspend-to-Idle state"
+              exit 1
+              ;;
+         "shallow") echo "But, suspended to Standby state"
+              exit 1
+              ;;
+         "deep") echo "And, suspended to Suspend-to-RAM state"
+              ;;
+     esac
+ else
+     echo "The system does not support suspend to RAM"
+     exit 1
+ fi
+user: root
+estimated_duration: 1
