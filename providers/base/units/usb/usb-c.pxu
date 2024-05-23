@@ -1,0 +1,354 @@
+id: usb-c/c-to-a-adapter/hid
+_summary: USB HID work on USB Type-C port using a "USB Type-C to Type-A" adapter
+_purpose:
+     This test will check that you can use a USB HID device plugged in a USB
+     Type-C port using a "USB Type-C to Type-A" adapter
+_steps:
+     1. Enable either a USB mouse or keyboard by plugging it in the USB Type-C port using a "USB Type-C to Type-A" adapter
+     2. For mice, perform actions such as moving the pointer, right and left button clicks and double clicks
+     3. For keyboards, switch to another tty and type some text
+_verification:
+     Did the device work as expected?
+plugin: manual
+flags: also-after-suspend
+category_id: com.canonical.plainbox::usb
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_data == 'True'
+estimated_duration: 60
+
+id: usb-c/c-to-a-adapter/insert
+_purpose:
+     This test will check that the system correctly detects the insertion of
+     a USB 3 storage device in a USB Type-C connector using a "Type-C to Type-A"
+     adapter.
+     NOTE: Make sure the USB storage device has a partition before starting
+     the test.
+_steps:
+     1. Commence the test
+     2. Connect a USB 3 storage device to a USB Type-C port using a
+        "Type-C to Type-A" adapter.
+     3. Do not unplug the device after the test.
+_verification:
+     The verification of this test is automated. Do not change the
+     automatically selected result.
+plugin: user-interact
+flags: also-after-suspend
+user: root
+command:
+ if [[ -v SNAP ]]; then
+     checkbox-support-run_watcher insertion usb3
+ else
+     removable_storage_watcher.py -m 500000000 insert usb
+ fi
+category_id: com.canonical.plainbox::usb
+imports: from com.canonical.plainbox import manifest
+requires:
+ usb.usb3 == 'supported'
+ manifest.has_usbc_data == 'True'
+estimated_duration: 30
+
+id: usb-c/c-to-a-adapter/storage-automated
+_description:
+ This test is automated and executes after the usb-c/c-to-a-adapter/insert test
+ is run.
+plugin: shell
+flags: also-after-suspend
+user: root
+command:
+ if [[ -v SNAP ]]; then
+     checkbox-support-usb_read_write
+ else
+     removable_storage_test.py -s 268400000 -m 500000000 usb --driver xhci_hcd
+ fi
+category_id: com.canonical.plainbox::usb
+imports: from com.canonical.plainbox import manifest
+requires:
+ manifest.has_usbc_data == 'True'
+depends: usb-c/c-to-a-adapter/insert
+estimated_duration: 60
+
+id: usb-c/c-to-a-adapter/remove
+_purpose:
+     This test will check that the system correctly detects the removal of
+     a USB 3 storage device connected to a USB Type-C port using a "USB Type-C
+     to Type-A" adapter.
+_steps:
+     1. Commence the test
+     2. Disconnect a USB 3 storage device to a USB Type-C port using a
+        "Type-C to Type-A" adapter
+_verification:
+     The verification of this test is automated. Do not change the
+     automatically selected result.
+plugin: user-interact
+flags: also-after-suspend
+user: root
+command:
+ if [[ -v SNAP ]]; then
+     checkbox-support-run_watcher removal usb3
+ else
+     removable_storage_watcher.py -m 500000000 remove usb
+ fi
+category_id: com.canonical.plainbox::usb
+depends: usb-c/c-to-a-adapter/insert
+imports: from com.canonical.plainbox import manifest
+requires:
+ manifest.has_usbc_data == 'True'
+estimated_duration: 30
+
+id: usb-c/hid
+_summary: USB HID work on USB Type-C port
+_purpose:
+     This test will check that you can use a USB HID device plugged in a USB
+     Type-C port
+_steps:
+     1. Enable either a USB mouse or keyboard by plugging it in the USB Type-C port
+     2. For mice, perform actions such as moving the pointer, right and left button clicks and double clicks
+     3. For keyboards, switch to another tty and type some text
+_verification:
+     Did the device work as expected?
+plugin: manual
+flags: also-after-suspend
+category_id: com.canonical.plainbox::usb
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_data == 'True'
+estimated_duration: 60
+
+id: usb-c/insert
+_summary: USB 3.0 storage device insertion detected on USB Type-C port
+_purpose:
+     This test will check that the system correctly detects the insertion of
+     a USB 3 storage device in a USB Type-C connector.
+     NOTE: Make sure the USB storage device has a partition before starting
+     the test.
+_steps:
+     1. Commence the test.
+     2. Connect a USB 3 storage device to a USB Type-C port.
+     3. Do not unplug the device after the test.
+_verification:
+     The verification of this test is automated. Do not change the
+     automatically selected result.
+plugin: user-interact
+flags: also-after-suspend
+user: root
+command:
+ if [[ -v SNAP ]]; then
+     checkbox-support-run_watcher insertion usb3
+ else
+     removable_storage_watcher.py -m 500000000 insert usb
+ fi
+category_id: com.canonical.plainbox::usb
+imports: from com.canonical.plainbox import manifest
+requires:
+ usb.usb3 == 'supported'
+ manifest.has_usbc_data == 'True'
+estimated_duration: 30
+
+id: usb-c/storage-automated
+_summary: USB 3.0 storage device read & write works on USB Type-C port
+_description:
+ This test is automated and executes after the usb-c/insert test
+ is run.
+plugin: shell
+flags: also-after-suspend
+user: root
+command:
+ if [[ -v SNAP ]]; then
+     checkbox-support-usb_read_write
+ else
+     removable_storage_test.py -s 268400000 -m 500000000 usb --driver xhci_hcd
+ fi
+category_id: com.canonical.plainbox::usb
+imports: from com.canonical.plainbox import manifest
+requires:
+ manifest.has_usbc_data == 'True'
+depends: usb-c/insert
+estimated_duration: 60
+
+id: usb-c/remove
+_summary: USB 3.0 storage device removal detected on USB Type-C port
+_purpose:
+     This test will check that the system correctly detects the removal of
+     a USB 3 storage device connected to a USB Type-C port.
+_steps:
+     1. Commence the test
+     2. Disconnect a USB 3 storage device to a USB Type-C port
+_verification:
+     The verification of this test is automated. Do not change the
+     automatically selected result.
+plugin: user-interact
+flags: also-after-suspend
+user: root
+command:
+ if [[ -v SNAP ]]; then
+     checkbox-support-run_watcher removal usb3
+ else
+     removable_storage_watcher.py -m 500000000 remove usb
+ fi
+category_id: com.canonical.plainbox::usb
+depends: usb-c/insert
+imports: from com.canonical.plainbox import manifest
+requires:
+ manifest.has_usbc_data == 'True'
+estimated_duration: 30
+
+id: usb-c/c-to-ethernet-adapter-insert
+plugin: user-interact
+flags: also-after-suspend
+category_id: com.canonical.plainbox::usb
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_data == 'True'
+command:
+ net_if_watcher.py
+_summary: Check if USB Type-C to Ethernet adapter works
+_purpose:
+ This test will check if system detects network interface of the Type-C to
+ ethernet adapter.
+_steps:
+ 1. Prepare USB Type-C to Ethernet adapter
+ 2. Start the test
+ 3. When the message "INSERT NOW" is shown, plug in the adapter to Type-C port
+estimated_duration: 20
+
+id: usb-c-otg/g_serial
+_summary: Check if USB OTG can work as a serial port.
+category_id: com.canonical.plainbox::usb
+plugin: user-interact-verify
+user: root
+estimated_duration: 300.0
+command:
+   modprobe g_serial
+_steps:
+ 1. Press enter to probe USB OTG g_serial
+ 2. Connect a USB cable from an Ubuntu host to the USB OTG (it's the USB type C connector) port on DUT.
+ 3. On the host, to check if ttyACM0 has been probed
+    $ ls /dev/ttyACM0
+ 4. On the host, listen to the ttyACM0 port as a receive side.
+    $ sudo su
+    $ cat /dev/ttyACM0
+ 5. On DUT, send a string via /dev/ttyGS0 as a send side.
+    $ sudo su
+    $ echo 123 > /dev/ttyGS0
+ 6. Check if received the string "123" on the host side.
+ 7. Check the string sending from the host to DUT by repeating steps 4-6, but swap the send and receive sides.
+_verification:
+    Does string send and receive work?
+flags: preserve-locale also-after-suspend
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_otg == 'True'
+
+id: usb-c-otg/g_serial-cleanup
+_summary: Cleanup USB OTG serial interface setup after serial device test
+plugin: shell
+after: usb-c-otg/g_serial
+category_id: com.canonical.plainbox::usb
+command:
+  echo "Removing g_serial module..."
+  modprobe -r g_serial
+user: root
+estimated_duration: 1s
+_siblings: [
+     { "id": "after-suspend-usb-c-otg/g_serial-cleanup",
+       "_summary": "Cleanup USB OTG serial interface setup after serial device test (after suspend)",
+       "after": "after-suspend-usb-c-otg/g_serial"
+     }]
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_otg == 'True'
+
+id: usb-c-otg/g_mass_storage
+_summary: Check DUT can be detected as a mass storage device
+_purpose:
+  Check that after connecting the device under test (DUT) to another device
+  (host), DUT can be detected as a mass storage device by the host.
+_steps:
+  1. Press Enter to setup a 16 MB FAT32 image on the device.
+  2. From an Ubuntu host, connect a cable to the USB OTG port 
+     (it's the USB type C connector) of the DUT.
+_verification:
+  The host detects and mounts a mass storage device. It has read and write 
+  permissions on it.
+plugin: user-interact-verify
+command:
+  echo "Creating 16 MB image file..."
+  dd if=/dev/zero of="${PLAINBOX_SESSION_SHARE}"/checkbox-mass-storage-test.img bs=1M count=16
+  echo "Formatting image file as FAT32..."
+  mkdosfs -F 32 "${PLAINBOX_SESSION_SHARE}"/checkbox-mass-storage-test.img
+  echo "loading g_mass_storage module..."
+  modprobe g_mass_storage file="${PLAINBOX_SESSION_SHARE}"/checkbox-mass-storage-test.img stall=0
+user: root
+category_id: com.canonical.plainbox::usb
+estimated_duration: 5m
+flags: preserve-locale also-after-suspend
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_otg == 'True'
+
+id: usb-c-otg/g_mass_storage-cleanup
+_summary: Cleanup mass storage setup after mass storage device test
+plugin: shell
+after: usb-c-otg/g_mass_storage
+command:
+  echo "Removing g_mass_storage module..."
+  modprobe -r g_mass_storage
+  if [ -f "${PLAINBOX_SESSION_SHARE}/checkbox-mass-storage-test.img" ]; then
+    echo "Removing image file..."
+    rm "${PLAINBOX_SESSION_SHARE}"/checkbox-mass-storage-test.img
+  fi
+user: root
+estimated_duration: 1s
+category_id: com.canonical.plainbox::usb
+_siblings: [
+     { "id": "after-suspend-usb-c-otg/g_mass_storage-cleanup",
+       "_summary": "Cleanup mass storage setup after mass storage device test (after suspend)",
+       "after": "after-suspend-usb-c-otg/g_mass_storage"
+     }]
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_otg == 'True'
+
+id: usb-c-otg/g_ether
+_summary: Check DUT can be detected as USB ethernet device
+_steps:
+  1. From an Ubuntu host, connect a cable to the USB OTG port 
+     (it's the USB type C connector) of the DUT.
+  2. Press Enter to config the IP address for the USB OTG ethernet interface on the DUT.
+     (IP will be 192.168.9.1/24)
+  3. On the host, config the IP address for the USB OTG ethernet interface. And it should be 
+     the same subnet with DUT. (eg. 192.168.9.2/24)
+  4. Try to ping between the host and DUT.
+_verification:
+  The host and DUT can ping each other.
+plugin: user-interact-verify
+command:
+   echo "Setting up the IP address for USB OTG ethernet interface..."
+   modprobe g_ether
+   if  (ip -c a | grep -q usb0) ; then 
+      echo "USB OTG ethernet interface exist. Configuring..."
+      ip addr add 192.168.9.1/24 dev usb0
+      echo "USB OTG ethernet interface IP address been set as 192.168.9.1/24"
+      ip link set dev usb0 up
+   else 
+      echo "USB OTG ethernet interface does not exist."
+      exit 1
+   fi
+user: root
+category_id: com.canonical.plainbox::usb
+estimated_duration: 5m
+flags: preserve-locale also-after-suspend
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_otg == 'True'
+
+id: usb-c-otg/g_ether-cleanup
+_summary: Cleanup USB OTG ethernet interface setup after ethernet device test
+plugin: shell
+after: usb-c-otg/g_ether
+command:
+  echo "Removing g_ether module..."
+  modprobe -r g_ether
+user: root
+estimated_duration: 1s
+category_id: com.canonical.plainbox::usb
+_siblings: [
+     { "id": "after-suspend-usb-c-otg/g_ether-cleanup",
+       "_summary": "Cleanup USB OTG ethernet interface setup after ethernet device test (after suspend)",
+       "after": "after-suspend-usb-c-otg/g_ether"
+     }]
+imports: from com.canonical.plainbox import manifest
+requires: manifest.has_usbc_otg == 'True'

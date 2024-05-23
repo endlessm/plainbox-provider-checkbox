@@ -1,0 +1,357 @@
+id: ubuntucore/os-recovery-mode
+_summary: Reboot into recovery mode and log into the system using prior credentials.
+_purpose:
+ Check if system will reboot to recovery mode successfully
+requires:
+ lsb.release >= '20'
+_steps:
+ 1. Reboot the system to recovery mode
+    $ sudo snap reboot --recover
+ 2. System should respond to the command and reboot itself
+ 3. Wait until system completes the reboot process
+ 4. Check if system is running in recovery mode
+    $ cat /proc/cmdline
+ 5. Reboot the system back to normal run mode
+    $ sudo snap reboot
+ 6. Check again if system is running in run mode
+    $ cat /proc/cmdline
+_verification:
+ Check if kernel cmdline when system in recovery mode includes:
+  'snapd_recovery_mode=recover'
+ Check if kernel cmdline when system in normal run mode includes:
+  'snapd_recovery_mode=run'
+plugin: manual
+category_id: ubuntucore
+
+id: ubuntucore/os-reinstall-mode
+_summary: Reboot into reinstall mode and trigger a factory reset on the device.
+_purpose:
+ Check if system will reboot to reinstall mode and reinitialise the device with fresh factory reset
+requires:
+ lsb.release >= '20'
+_steps:
+ WARNING: ALL EXISTING DATA ON THIS DEVICE WILL BE WIPED!!
+ 1. Check the current serial-assertion device-key
+    $ ls /var/lib/snapd/save/device/private-keys-v1
+ 2. Clear TPM first if this device has enabled secure boot & FDE
+    For x86-based platforms:
+    $ sudo su
+    $ echo 5 > /sys/class/tpm/tpm0/ppi/request
+    For ARM-based platforms:
+    There is no generic command for ARM-based platforms, please refer to device user manual
+ 3. Reboot the system to reinstall mode
+    $ sudo snap reboot --install
+ 4. System should respond to the command and reboot itself
+ 5. Wait until system completes the installation and initialization process
+ 6. Check serial-assertion device-key after installation completes
+    $ ls /var/lib/snapd/save/device/private-keys-v1
+_verification:
+ Check if a new serial-assertion device-key got generated after reinstallation completes
+plugin: manual
+category_id: ubuntucore
+
+unit: template
+template-resource: lsb
+template-filter: lsb.distributor_id == 'Ubuntu Core'
+template-engine: jinja2
+template-unit: job
+id: ubuntucore/os-fail-boot-{{description}}
+_summary: Automatically rollback after failed boot after upgrade
+_purpose:
+ Check system will rollback to original core snap if failed to boot the updated one
+_steps:
+ {% if release == '16' -%}
+   {% set release = '' -%}
+ {% endif -%}
+ 1. Check the current revision of core{{release}}
+    $ snap list core{{release}}
+ 2. Update to edge.
+    Note that system will automatically reboot in 1 minute after doing this command.
+    Please execute the command in step 3 in 1 minute to stop the automatic reboot.
+    $ sudo snap refresh core{{release}} --edge
+ 3. Cancel the automatic shutdown
+    $ sudo shutdown -c
+ 4. Simulate a failed boot by the following command
+    $ sudo sed -i 's/base_status=try/base_status=trying/' /var/lib/snapd/modeenv
+ 5. Reboot the system and log in
+    $ sudo reboot
+ 6. Check the revision of core{{release}} again
+    $ snap list core{{release}}
+_verification:
+ Check system is still booting the stable core version (original revision)
+plugin: manual
+category_id: ubuntucore
+estimated_duration: 500
+
+unit: template
+template-resource: lsb
+template-filter: lsb.distributor_id == 'Ubuntu Core'
+template-engine: jinja2
+template-unit: job
+id: ubuntucore/os-fail-boot-with-refresh-control-{{description}}
+_summary: Automatically rollback after failed boot after upgrade
+_purpose:
+ Check system will rollback to original core snap if failed to boot the updated one
+_steps:
+ {% if release == '16' -%}
+   {% set release = '' -%}
+ {% endif -%}
+ 1. Check the current revision of core{{release}}
+    $ snap list core{{release}}
+ 2. Update to edge.
+    Note that system will automatically reboot in 1 minute after doing this command.
+    Please execute the command in step 3 in 1 minute to stop the automatic reboot.
+    $ sudo snap refresh core{{release}} --edge --ignore-validation
+ 3. Cancel the automatic shutdown
+    $ sudo shutdown -c
+ 4. Simulate a failed boot by the following command
+    $ sudo sed -i 's/base_status=try/base_status=trying/' /var/lib/snapd/modeenv
+ 5. Reboot the system and log in
+    $ sudo reboot
+ 6. Check the revision of core{{release}} again
+    $ snap list core{{release}}
+_verification:
+ Check system is still booting the stable core version (original revision)
+plugin: manual
+category_id: ubuntucore
+estimated_duration: 500
+
+id: ubuntucore/sshd
+_summary: SSH is enabled and operational
+_purpose:
+ Check if user can access the system through ssh from other machine
+_steps:
+ 1. Execute following command on other machine in same network
+    $ ssh [user id]@[ip address of the testing system]
+ 2. Enter password to login
+_verification:
+ Can log into system through ssh from other machine
+plugin: manual
+category_id: ubuntucore
+estimated_duration: 120
+
+unit: template
+template-resource: model_assertion
+template-unit: job
+plugin: manual
+id: ubuntucore/kernel-failboot-{kernel}
+_summary: Reboot with failboot kernel to verify system rollback function
+_purpose:
+ Check if system will rollback to previous(functional) kernel
+_description:
+ This test checks the kernel rollback function.
+ When booting a kernel that fails to boot, system should be able to rollback
+ to previous one.
+ To perform this test, a failboot kernel should be in edge/kernel-failboot-test
+ for testing.
+_steps:
+ 1. Refresh kernel to the failboot branch
+    sudo snap refresh {kernel} --channel=edge/kernel-failboot-test
+ 2. Wait for system reboot after kernel snap refresh
+_verification:
+ Check if system could boot, and kernel version is the one before switched to
+ "failboot" kernel
+category_id: ubuntucore
+
+id: snap_revision_info
+plugin: resource
+_summary:
+ Gather name, tracking, and revision info of the kernel, snapd and gadget snaps
+estimated_duration: 3s
+command:
+    snap_update_test.py --resource
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-refresh-{type}-{name}-to-stable-rev
+_summary: Refresh {name} snap to latest revision in stable channel
+_description:
+    This test is currently for SUV process, the snap to be tested is on
+    the beta channel. Test the availability to refresh to the older version
+    on the stable channel. This test will be excuted only when the current
+    installed revision (on beta channel) is different from the revsion in
+    stable channel.
+plugin: shell
+estimated_duration: 1m
+category_id: ubuntucore
+user: root
+imports: from com.canonical.certification import snap_revision_info
+requires:
+ (snap_revision_info.name == "{name}") and snap_revision_info.stable_rev != snap_revision_info.original_installed_rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --refresh --revision {stable_rev} --info-path "$path" {name}
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/reboot-after-snap-refresh-{type}-{name}-to-stable-rev
+_summary: Reboot after {name} snap refresh to latest revision in stable channel
+plugin: shell
+flags: noreturn autorestart
+estimated_duration: 3m
+category_id: ubuntucore
+user: root
+depends: ubuntucore/snap-refresh-{type}-{name}-to-stable-rev
+command:
+    echo "Waiting 90s for any snap operation to finish before rebooting..."
+    sleep 90
+    reboot
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-verify-after-refresh-{type}-{name}-to-stable-rev
+_summary: Verify {name} snap revision after refreshing to latest revision in stable channel
+plugin: shell
+estimated_duration: 30s
+category_id: ubuntucore
+user: root
+depends: ubuntucore/reboot-after-snap-refresh-{type}-{name}-to-stable-rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --verify-refresh --info-path "$path" {name}
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-revert-{type}-{name}-from-stable-rev
+_summary: Revert {name} snap to original revision from stable channel
+plugin: shell
+estimated_duration: 3m
+category_id: ubuntucore
+user: root
+depends: ubuntucore/snap-verify-after-refresh-{type}-{name}-to-stable-rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --revert --info-path "$path" {name}
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/reboot-after-snap-revert-{type}-{name}-from-stable-rev
+_summary: Reboot after {name} snap reverting to latest revision in stable channel
+plugin: shell
+flags: noreturn autorestart
+estimated_duration: 3m
+category_id: ubuntucore
+user: root
+depends: ubuntucore/snap-revert-{type}-{name}-from-stable-rev
+command:
+    echo "Waiting 90s for any snap operation to finish before rebooting..."
+    sleep 90
+    reboot
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-verify-after-revert-{type}-{name}-from-stable-rev
+_summary: Verify {name} snap revision after reverting from stable revision
+plugin: shell
+estimated_duration: 3s
+category_id: ubuntucore
+user: root
+depends: ubuntucore/reboot-after-snap-revert-{type}-{name}-from-stable-rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --verify-revert --info-path "$path" {name}
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-refresh-{type}-{name}-to-base-rev
+_summary: Refresh {name} snap to its base revision
+_description:
+    This test is currently for SUV process, the snap to be tested is on
+    the beta channel. Test the availability to refresh to the base revision
+    (the revision that came with the image). This test will be excuted only
+    when the current installed revision (on beta channel) is different from the
+    base revision.
+    This job (and the jobs depending on it) are useful when the device cannot
+    be reprovisioned easily, but you still want to simulate a fresh install
+    that would bump to the latest revision available.
+plugin: shell
+estimated_duration: 3m
+category_id: ubuntucore
+user: root
+imports: from com.canonical.certification import snap_revision_info
+requires:
+ (snap_revision_info.name == "{name}") and snap_revision_info.base_rev != snap_revision_info.original_installed_rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --refresh --revision {base_rev} --info-path "$path" {name}
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/reboot-after-snap-refresh-{type}-{name}-to-base-rev
+_summary: Reboot after {name} snap refresh to base revision
+plugin: shell
+flags: noreturn autorestart
+estimated_duration: 3m
+category_id: ubuntucore
+user: root
+depends: ubuntucore/snap-refresh-{type}-{name}-to-base-rev
+command:
+    echo "Waiting 90s for any snap operation to finish before rebooting..."
+    sleep 90
+    reboot
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-verify-after-refresh-{type}-{name}-to-base-rev
+_summary: Verify {name} snap revision after refreshing to base revision
+plugin: shell
+estimated_duration: 30s
+category_id: ubuntucore
+user: root
+depends: ubuntucore/reboot-after-snap-refresh-{type}-{name}-to-base-rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --verify-refresh --info-path "$path" {name}
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-revert-{type}-{name}-from-base-rev
+_summary: Revert {name} snap from base revision to original revision
+plugin: shell
+estimated_duration: 3m
+category_id: ubuntucore
+user: root
+depends: ubuntucore/snap-verify-after-refresh-{type}-{name}-to-base-rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --revert --info-path "$path" {name}
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/reboot-after-snap-revert-{type}-{name}-from-base-rev
+_summary: Reboot after {name} snap revert to base revision
+plugin: shell
+flags: noreturn autorestart
+estimated_duration: 3m
+category_id: ubuntucore
+user: root
+depends: ubuntucore/snap-revert-{type}-{name}-from-base-rev
+command:
+    echo "Waiting 90s for any snap operation to finish before rebooting..."
+    sleep 90
+    reboot
+
+unit: template
+template-resource: snap_revision_info
+template-unit: job
+id: ubuntucore/snap-verify-after-revert-{type}-{name}-from-base-rev
+_summary: Verify {name} snap revision after reverting from base revision
+plugin: shell
+estimated_duration: 3s
+category_id: ubuntucore
+user: root
+depends: ubuntucore/reboot-after-snap-revert-{type}-{name}-from-base-rev
+command:
+    path="$PLAINBOX_SESSION_SHARE/{name}_snap_revision_info"
+    snap_update_test.py --verify-revert --info-path "$path" {name}

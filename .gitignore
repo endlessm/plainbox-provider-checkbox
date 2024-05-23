@@ -1,8 +1,0 @@
-*.egg-info
-*.pyc
-.coverage
-MANIFEST
-__pycache__
-build
-dist
-htmlcov
