@@ -1,3 +1,4 @@
-# git-build-recipe format 0.4 deb-version 0.59.0~ppa
-lp:plainbox-provider-checkbox git-commit:4ff3d79c68c22a83cd3e93d4059851f9cc3247c7
-nest-part packaging lp:~checkbox-dev/plainbox-provider-checkbox/+git/packaging debian debian git-commit:f34bad5585a83e08ebdf6bd941a8cdcb02216511
+# git-build-recipe format 0.4 deb-version 3.3.0~dev19
+lp:~checkbox-dev/checkbox/+git/support git-commit:d941444c9af251e9c06c1014564e104b0cbe9442
+nest-part packaging lp:~checkbox-dev/checkbox providers/base/debian debian git-commit:ed24d8c0260257b354d7721ab260758b57c713a5
+nest-part monorepo lp:~checkbox-dev/checkbox providers/base providers/base git-commit:ed24d8c0260257b354d7721ab260758b57c713a5

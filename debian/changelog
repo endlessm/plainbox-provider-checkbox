@@ -1,97 +1,39 @@
-plainbox-provider-checkbox (0.59.0~ppa~ubuntu21.10.1) impish; urgency=low
+checkbox-provider-base (3.3.0~dev19~ubuntu24.04.1) noble; urgency=low
 
   * Auto build.
 
- -- Canonical Certification Team <ce-certification-qa@lists.canonical.com>  Mon, 12 Jul 2021 15:31:47 +0000
+ -- Massimiliano Girardi <massimiliano.girardi@canonical.com>  Thu, 14 Mar 2024 10:30:09 +0000
 
-plainbox-provider-checkbox (0.59.0-1) UNRELEASED; urgency=medium
+checkbox-provider-base (2.8) UNRELEASED; urgency=medium
 
-  [ Pierre Equoy ]
-  * Open for development (remove this message before releasing)
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
+  * new upstream version
 
-  [ Sylvain Pineau ]
-  * "new upstream version"
-  * "new upstream version"
+ -- Devices Certification Bot <robot@canonical.com>  Wed, 14 Jun 2023 06:35:57 +0000
+
+checkbox-provider-base (2.2.0) unstable; urgency=medium
+
   * "new upstream version"
 
-  [ Pierre Equoy ]
-  * "new upstream version"
+ -- Devices Certification Bot <robot@canonical.com>  Mon, 13 Mar 2023 07:55:22 +0000
+
+checkbox-provider-base (2.1.0) unstable; urgency=medium
+
   * "new upstream version"
 
-  [ Sylvain Pineau ]
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
+ -- Devices Certification Bot <robot@canonical.com>  Thu, 17 Nov 2022 09:51:17 +0000
+
+checkbox-provider-base (2.0.0) unstable; urgency=medium
+
+  * new upstream version
+
+ -- Sylvain Pineau <sylvain.pineau@canonical.com>  Fri, 23 Sep 2022 19:29:38 +0200
+
+plainbox-provider-checkbox (0.65.0) unstable; urgency=medium
 
   [ Jenkins ]
   * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
-  * "new upstream version"
 
- -- Jenkins <jenkins@open-joey-201506-18558.maas>  Mon, 12 Jul 2021 14:58:12 +0000
+ -- Jenkins <ubuntu@cert-jenkins-master-201506-18558.maas>  Tue, 05 Jul 2022 07:31:55 +0000
 
 plainbox-provider-checkbox (0.31) unstable; urgency=medium
 
