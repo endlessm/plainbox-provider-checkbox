@@ -148,7 +148,7 @@ flags: preserve-cwd
 command: removable_storage_test.py -s 268400000 --memorycard -l sdio usb scsi && removable_storage_test.py --memorycard sdio usb scsi
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 _summary: Automated test of SD Card reading & writing (udisk2)
 _description:

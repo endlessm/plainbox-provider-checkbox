@@ -1618,7 +1618,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:
@@ -1669,7 +1669,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:
@@ -1722,7 +1722,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:
@@ -1774,7 +1774,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:
@@ -1825,7 +1825,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:
@@ -1876,7 +1876,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:
@@ -1927,7 +1927,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:
@@ -1978,7 +1978,7 @@ estimated_duration: 30.0
 depends: suspend/suspend_advanced_auto
 imports: from com.canonical.plainbox import manifest
 requires:
- package.name == 'udisks2' or snap.name == 'udisks2'
+ package.name == 'udisks2'
  manifest.has_card_reader == 'True'
 command: removable_storage_watcher.py --memorycard insert sdio usb scsi
 _description:

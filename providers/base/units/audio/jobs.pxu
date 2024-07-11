@@ -787,7 +787,6 @@ _verification:
  Did you hear the recorded sound correctly?
 plugin: manual
 flags: also-after-suspend
-requires: snap.name == 'pulseaudio'
 category_id: com.canonical.plainbox::audio
 estimated_duration: 1m
 
@@ -819,7 +818,6 @@ _verification:
  Did you hear the recorded sound correctly?
 plugin: manual
 flags: also-after-suspend
-requires: snap.name == 'pulseaudio'
 category_id: com.canonical.plainbox::audio
 estimated_duration: 1m
 
@@ -847,7 +845,6 @@ _verification:
  Did you hear the sound correctly?
 plugin: manual
 flags: also-after-suspend
-requires: snap.name == 'pulseaudio'
 category_id: com.canonical.plainbox::audio
 estimated_duration: 1m
 
@@ -875,7 +872,6 @@ _verification:
  Did you hear the sound correctly?
 plugin: manual
 flags: also-after-suspend
-requires: snap.name == 'pulseaudio'
 category_id: com.canonical.plainbox::audio
 estimated_duration: 1m
 
@@ -903,6 +899,5 @@ _verification:
  Did you hear the sound correctly?
 plugin: manual
 flags: also-after-suspend
-requires: snap.name == 'pulseaudio'
 category_id: com.canonical.plainbox::audio
 estimated_duration: 1m
