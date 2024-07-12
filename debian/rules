@@ -19,7 +19,7 @@ override_dh_auto_install:
 		--prefix=/usr --layout=unix \
 		--root=$(CURDIR)/debian/checkbox-provider-base/
 	install -d $(CURDIR)/debian/checkbox-provider-base/etc/xdg
-	install -m 644 config/eos.conf -T \
+	install -m 644 providers/base/config/eos.conf -T \
 		$(CURDIR)/debian/checkbox-provider-base/etc/xdg/checkbox.conf
 
 override_dh_gencontrol:
