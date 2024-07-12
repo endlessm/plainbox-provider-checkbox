@@ -149,7 +149,6 @@ _description:
  This job collects the output of "tpm_version" for inspection by a
  Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.version 2>&1
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -162,7 +161,6 @@ _description:
  This job collects the output of "tpm_selftest" for inspection by the
  Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.selftest 2>&1
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -175,7 +173,6 @@ _description:
  This simply collects the output of "tpm_setactive --status --well-known" for
  inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.setactive --status --well-known 2>&1
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -188,7 +185,6 @@ _description:
  This simply collects the output of "tpm_nvinfo" for inspection by a
  Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.nvinfo
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -201,7 +197,6 @@ _description:
  This simply collects the output of "tpm_restrictpubek --status --well-known"
  for inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.restrictpubek --status --well-known
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -214,7 +209,6 @@ _description:
  This simply collects the output of "tpm_restrictsrk --status --well-known"
  for inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.restrictsrk --status --well-known
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -227,7 +221,6 @@ _description:
  This simply collects the output of "tpm_setclearable --status --well-known"
  for inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.setclearable --status --well-known
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -240,7 +233,6 @@ _description:
  This simply collects the output of "tpm_setenable --status --well-known"
  for inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.setenable --status --well-known
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -253,7 +245,6 @@ _description:
  This simply collects the output of "tpm_setownable --status --well-known"
  for inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.setownable --status --well-known
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -266,7 +257,6 @@ _description:
  This simply collects the output of "tpm_setpresence --status --well-known"
  for inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.setpresence --status --well-known
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd
@@ -279,7 +269,6 @@ _description:
  This simply collects the output of "tpm_getpubek --well-known"
  for inspection by a Certification engineer.
 plugin: shell
-requires: snap.name == 'tpm'
 command: tpm.getpubek --well-known
 estimated_duration: 1s
 flags: preserve-locale preserve-cwd

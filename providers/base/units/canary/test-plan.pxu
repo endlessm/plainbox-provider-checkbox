@@ -13,9 +13,7 @@ bootstrap_include:
  com.canonical.certification::bootloader
  com.canonical.certification::cpuinfo
  com.canonical.certification::device
- com.canonical.certification::interface
  com.canonical.certification::net_if_management
- com.canonical.certification::model_assertion
  com.canonical.certification::dmi_present
  com.canonical.certification::dmi
  com.canonical.certification::removable_partition

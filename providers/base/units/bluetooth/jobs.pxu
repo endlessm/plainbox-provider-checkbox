@@ -18,7 +18,7 @@ user: root
 depends: bluetooth/detect
 template-engine: jinja2
 requires:
-  package.name == 'bluez' or snap.name == 'bluez'
+  package.name == 'bluez'
   {%- if __on_ubuntucore__ %}
   connections.slot == 'bluez:service' and connections.plug == '{{ __system_env__["SNAP_NAME"] }}:bluez'
   {% endif -%}
@@ -33,7 +33,7 @@ id: bluetooth/detect-output
 flags: also-after-suspend
 estimated_duration: 1.2
 requires:
- package.name == 'bluez' or snap.name == 'bluez'
+ package.name == 'bluez'
  device.category == 'BLUETOOTH'
 command:
  if rfkill list bluetooth | grep -q 'Hard blocked: yes'; then

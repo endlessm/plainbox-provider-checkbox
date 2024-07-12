@@ -511,7 +511,7 @@ user: root
 estimated_duration: 15
 
 unit: template
-template-resource: model_assertion
+template-resource: cpuinfo
 template-unit: job
 plugin: shell
 category_id: com.canonical.plainbox::power-management

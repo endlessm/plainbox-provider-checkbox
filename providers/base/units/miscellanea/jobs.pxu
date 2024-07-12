@@ -12,7 +12,6 @@ depends:
  meminfo
  module
  package
- snap
  requirements
  uname
  device
@@ -146,22 +145,6 @@ _summary: Test that system supports booting into firmware setup utility
 _description:
  Test that the system supports rebooting into the firmware setup utility.
 command: boot_mode_test.py reboot_firmware
-
-plugin: shell
-category_id: com.canonical.plainbox::miscellanea
-estimated_duration: 0.5
-unit: template
-template-resource: model_assertion
-template-unit: job
-requires:
- executable.name == 'dumpimage' or executable.name == 'mokutil'
-id: miscellanea/secure_boot_mode_{gadget}
-_summary: Test that {gadget} Ubuntu Core system booted with Secure Boot active
-_description:
- Test to verify that the system booted with Secure Boot active.
-user:root
-command:
- boot_mode_test_snappy.py {gadget} {kernel}
 
 plugin: shell
 category_id: com.canonical.plainbox::miscellanea

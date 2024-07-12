@@ -2,7 +2,6 @@ id: location/status
 _summary: Queries the status of a service instance
 command: locationd.status
 category_id: location
-requires: snap.name == 'locationd'
 estimated_duration: 1
 flags: simple preserve-cwd also-after-suspend
 
@@ -10,7 +9,6 @@ id: location/monitor
 _summary: Connects to a location service instance, monitoring its activity.
 command: timeout 15m bash -c 'grep -m 1 Update <( exec locationd.monitor ); kill $! 2> /dev/null'
 category_id: location
-requires: snap.name == 'locationd'
 estimated_duration: 900
 flags: simple preserve-cwd also-after-suspend
 
@@ -25,7 +23,6 @@ _verification:
   Did the command succeed?
 category_id: location
 flags: also-after-suspend
-requires: snap.name == 'locationd'
 estimated_duration: 1
 plugin: manual
 
@@ -40,7 +37,6 @@ _verification:
   Did the command succeed (it can take up to 15m from a cold start)?
 category_id: location
 flags: also-after-suspend
-requires: snap.name == 'locationd'
 estimated_duration: 900
 plugin: manual
 
